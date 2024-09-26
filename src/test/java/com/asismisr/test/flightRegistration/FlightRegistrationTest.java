@@ -7,6 +7,7 @@ import com.asismisr.pages.flightRegistration.registrationConfirmation.Registrati
 import com.asismisr.test.BaseTest;
 import com.asismisr.test.flightRegistration.model.FlightReservationTestData;
 import com.asismisr.pages.flightRegistration.customerRegistration.CustomerRegistrationPage;
+import com.asismisr.utils.JsonUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -19,7 +20,7 @@ public class FlightRegistrationTest extends BaseTest {
     @BeforeTest
     @Parameters("testDataPath")
     public void setParameters(String testDataPath){
-//        this.testData = JsonUtil.getTestData(testDataPath, FlightReservationTestData.class);
+        this.testData = JsonUtil.getTestData(testDataPath, FlightReservationTestData.class);
     }
 
     @Test
