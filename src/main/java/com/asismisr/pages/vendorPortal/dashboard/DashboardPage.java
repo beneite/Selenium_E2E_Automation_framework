@@ -1,6 +1,6 @@
 package com.asismisr.pages.vendorPortal.dashboard;
 
-import com.asismisr.pages.BasePage;
+import com.asismisr.pages.vendorPortal.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

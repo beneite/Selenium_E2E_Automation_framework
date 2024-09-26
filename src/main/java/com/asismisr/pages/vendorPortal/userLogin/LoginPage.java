@@ -1,13 +1,10 @@
 package com.asismisr.pages.vendorPortal.userLogin;
 
-import com.asismisr.pages.BasePage;
-import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
+import com.asismisr.pages.vendorPortal.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 public class LoginPage extends BasePage {

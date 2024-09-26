@@ -1,3 +1,6 @@
+/**
+ * this class contains the common page methods that we can use across all other pages for vendorPortal.
+ */
 package com.asismisr.pages.vendorPortal;
 
 import org.openqa.selenium.WebDriver;

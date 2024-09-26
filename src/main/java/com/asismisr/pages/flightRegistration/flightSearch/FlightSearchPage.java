@@ -1,6 +1,6 @@
 package com.asismisr.pages.flightRegistration.flightSearch;
 
-import com.asismisr.pages.BasePage;
+import com.asismisr.pages.flightRegistration.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -1,7 +1,7 @@
 /**
- * this class contains the common page methods that we can use across all other pages.
+ * this class contains the common page methods that we can use across all other pages for flightRegistration.
  */
-package com.asismisr.pages;
+package com.asismisr.pages.flightRegistration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
