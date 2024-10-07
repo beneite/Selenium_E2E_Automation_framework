@@ -7,6 +7,8 @@ import com.asismisr.pages.flightRegistration.registrationConfirmation.Registrati
 import com.asismisr.test.BaseTest;
 import com.asismisr.test.flightRegistration.model.FlightReservationTestData;
 import com.asismisr.pages.flightRegistration.customerRegistration.CustomerRegistrationPage;
+import com.asismisr.utils.Config;
+import com.asismisr.utils.Constants;
 import com.asismisr.utils.JsonUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -26,7 +28,7 @@ public class FlightRegistrationTest extends BaseTest {
     @Test
     public void userRegistrationTest(){
         CustomerRegistrationPage registrationPage = new CustomerRegistrationPage(driver);
-        registrationPage.goTo("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/reservation-app/index.html");
+        registrationPage.goTo(Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
         Assert.assertTrue(registrationPage.isAt());
 
         registrationPage.enterUserDetails(testData.firstName(), testData.lastName());

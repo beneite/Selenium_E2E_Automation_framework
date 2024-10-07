@@ -17,7 +17,7 @@ public class Config {
      * This method will override the default properties which are provided in config.properties(CONFIG_FILE_LOCATION)
      * Suppose if a use runs a test via a command line with different browser, other property..., then those properties should be loaded
      */
-    public static void overrideProperties(){
+    public static void initializeProperties(){
 
         // load the default properties
         properties = loadProperties();
