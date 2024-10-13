@@ -59,7 +59,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>selenium-docker</finalName>
+        <finalName>selenium-code-compiled</finalName>
         <plugins>
             <!-- To compile the source code using specific java version. also to force IDE to change the settings -->
             <plugin>
@@ -115,13 +115,16 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven.jar.version}</version>
                 <configuration>
-                    <outputDirectory>${package.directory}</outputDirectory>
+                    <outputDirectory>${package.directory}/libs</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>test-jar</goal>
                         </goals>
+                        <configuration>
+                            <includes>**/*.class</includes>     <!-- include only *.class files i.e. basically excluding the resources folder content-->
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
