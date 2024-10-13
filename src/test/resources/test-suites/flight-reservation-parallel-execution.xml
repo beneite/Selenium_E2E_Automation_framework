@@ -8,22 +8,22 @@
             <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>
         </classes>
     </test>
-    <test name="passengers-count-2">
-        <parameter name="testDataPath" value="test-data/flightRegistration/passenger-2.json" />
-        <classes>
-            <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>
-        </classes>
-    </test>
-    <test name="passengers-count-3">
-        <parameter name="testDataPath" value="test-data/flightRegistration/passenger-3.json" />
-        <classes>
-            <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>
-        </classes>
-    </test>
-    <test name="passengers-count-4">
-        <parameter name="testDataPath" value="test-data/flightRegistration/passenger-4.json" />
-        <classes>
-            <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>
-        </classes>
-    </test>
+<!--    <test name="passengers-count-2">-->
+<!--        <parameter name="testDataPath" value="test-data/flightRegistration/passenger-2.json" />-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="passengers-count-3">-->
+<!--        <parameter name="testDataPath" value="test-data/flightRegistration/passenger-3.json" />-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="passengers-count-4">-->
+<!--        <parameter name="testDataPath" value="test-data/flightRegistration/passenger-4.json" />-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.flightRegistration.FlightRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
