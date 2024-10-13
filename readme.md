@@ -4,8 +4,13 @@
 - [Vendor Portal](https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/vendor-app/index.html)
 
 ## Table of Contents
+- [Project Architecture](#project-architecture)
+- Run test Locally via testng from `src/test/resources/test-suites/flight-reservation-parallel-execution.xml`
 - [How to run test from Target folder](#how-to-run-test-from-target-folder)
-- [Running Tests](#running-tests)
+- [Running Tests from target using env variables](#running-tests-from-target-using-env-variables)
+
+## Project Architecture
+![projectArchitecture.png](src%2Ftest%2Fresources%2Fdocker%2FprojectArchitecture.png)
 
 ## How to run test from Target folder
 
@@ -25,9 +30,11 @@
 - Mac/Linux Users
     - Try via `bash`
 
-## Running Tests
+## Running Tests from target using env variables
 
 ### TestNG parameters
+
+- Go to `docker-resources` via command line. Then issue this command. One of them should work.
 
 - Running a test suite
 
