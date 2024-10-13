@@ -10,7 +10,7 @@ import java.util.Properties;
 public class Config {
 
     private static final Logger log = LoggerFactory.getLogger(DashboardPage.class);
-    private static final String CONFIG_FILE_LOCATION = System.getProperty("user.dir")+"/src/test/resources/config/default.properties";
+    private static final String CONFIG_FILE_LOCATION = "config/default.properties";
     private static Properties properties;
 
     /**
