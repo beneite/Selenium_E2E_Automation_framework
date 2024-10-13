@@ -9,6 +9,7 @@ import com.asismisr.test.flightRegistration.model.FlightReservationTestData;
 import com.asismisr.pages.flightRegistration.customerRegistration.CustomerRegistrationPage;
 import com.asismisr.utils.Config;
 import com.asismisr.utils.Constants;
+import com.asismisr.utils.ExtentReportUtils;
 import com.asismisr.utils.JsonUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -27,45 +28,66 @@ public class FlightRegistrationTest extends BaseTest {
 
     @Test
     public void userRegistrationTest(){
+        ExtentReportUtils.getTest().info("Verify userRegistrationTest");
         CustomerRegistrationPage registrationPage = new CustomerRegistrationPage(driver);
         registrationPage.goTo(Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
+        ExtentReportUtils.getTest().info("Navigating to URL:"+Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
         Assert.assertTrue(registrationPage.isAt());
 
         registrationPage.enterUserDetails(testData.firstName(), testData.lastName());
         registrationPage.enterUserCredentials(testData.email(), testData.password());
         registrationPage.enterAddress(testData.street(), testData.city(), testData.zip());
         registrationPage.register();
+        ExtentReportUtils.getTest().pass("User successfully registered");
     }
 
     @Test(dependsOnMethods = "userRegistrationTest")
     public void registrationConfirmationTest(){
+        userRegistrationTest();
+        ExtentReportUtils.getTest().info("Verify registrationConfirmationTest");
         RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage(driver);
         Assert.assertTrue(registrationConfirmationPage.isAt());
         Assert.assertEquals(registrationConfirmationPage.getFirstName(), testData.firstName());
         registrationConfirmationPage.goToFlightsSearch();
+        ExtentReportUtils.getTest().pass("User registrationConfirmationTest pass");
     }
 
     @Test(dependsOnMethods = "registrationConfirmationTest")
     public void flightsSearchTest(){
+        userRegistrationTest();
+        registrationConfirmationTest();
+        ExtentReportUtils.getTest().info("Verify flightsSearchTest");
         FlightSearchPage flightsSearchPage = new FlightSearchPage(driver);
         Assert.assertTrue(flightsSearchPage.isAt());
         flightsSearchPage.selectPassengers(testData.passengersCount());
         flightsSearchPage.searchFlights();
+        ExtentReportUtils.getTest().pass("User flightsSearchTest pass");
     }
 
     @Test(dependsOnMethods = "flightsSearchTest")
     public void flightsSelectionTest(){
+        userRegistrationTest();
+        registrationConfirmationTest();
+        flightsSearchTest();
+        ExtentReportUtils.getTest().info("Verify flightsSelectionTest");
         FlightSelectionPage flightsSelectionPage = new FlightSelectionPage(driver);
         Assert.assertTrue(flightsSelectionPage.isAt());
         flightsSelectionPage.selectFlights();
         flightsSelectionPage.confirmFlights();
+        ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
     }
 
     @Test(dependsOnMethods = "flightsSelectionTest")
     public void flightReservationConfirmationTest(){
+        userRegistrationTest();
+        registrationConfirmationTest();
+        flightsSearchTest();
+        flightsSelectionTest();
+        ExtentReportUtils.getTest().info("Verify flightReservationConfirmationTest");
         FlightConfirmationPage flightConfirmationPage = new FlightConfirmationPage(driver);
         Assert.assertTrue(flightConfirmationPage.isAt());
         Assert.assertEquals(flightConfirmationPage.getPrice(), testData.expectedPrice());
+        ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
     }
 
 }
