@@ -19,6 +19,11 @@ import org.testng.annotations.Test;
 public class FlightRegistrationTest extends BaseTest {
 
     private FlightReservationTestData testData;
+    private CustomerRegistrationPage registrationPage;
+    private RegistrationConfirmationPage registrationConfirmationPage;
+    private FlightSearchPage flightsSearchPage;
+    private FlightSelectionPage flightsSelectionPage;
+    private FlightConfirmationPage flightConfirmationPage;
 
     @BeforeTest
     @Parameters("testDataPath")
@@ -28,40 +33,40 @@ public class FlightRegistrationTest extends BaseTest {
 
     @Test
     public void userRegistrationTest(){
-        ExtentReportUtils.getTest().info("Verify userRegistrationTest");
-        CustomerRegistrationPage registrationPage = new CustomerRegistrationPage(driver);
+//        //ExtentReportUtils.getTest().info("Verify userRegistrationTest");
+        this.registrationPage = new CustomerRegistrationPage(driver);
         registrationPage.goTo(Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
-        ExtentReportUtils.getTest().info("Navigating to URL:"+Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
+//        //ExtentReportUtils.getTest().info("Navigating to URL:"+Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
         Assert.assertTrue(registrationPage.isAt());
 
         registrationPage.enterUserDetails(testData.firstName(), testData.lastName());
         registrationPage.enterUserCredentials(testData.email(), testData.password());
         registrationPage.enterAddress(testData.street(), testData.city(), testData.zip());
         registrationPage.register();
-        ExtentReportUtils.getTest().pass("User successfully registered");
+        //ExtentReportUtils.getTest().pass("User successfully registered");
     }
 
     @Test(dependsOnMethods = "userRegistrationTest")
     public void registrationConfirmationTest(){
         userRegistrationTest();
-        ExtentReportUtils.getTest().info("Verify registrationConfirmationTest");
-        RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage(driver);
+        //ExtentReportUtils.getTest().info("Verify registrationConfirmationTest");
+        this.registrationConfirmationPage = new RegistrationConfirmationPage(driver);
         Assert.assertTrue(registrationConfirmationPage.isAt());
         Assert.assertEquals(registrationConfirmationPage.getFirstName(), testData.firstName());
         registrationConfirmationPage.goToFlightsSearch();
-        ExtentReportUtils.getTest().pass("User registrationConfirmationTest pass");
+        //ExtentReportUtils.getTest().pass("User registrationConfirmationTest pass");
     }
 
     @Test(dependsOnMethods = "registrationConfirmationTest")
     public void flightsSearchTest(){
         userRegistrationTest();
         registrationConfirmationTest();
-        ExtentReportUtils.getTest().info("Verify flightsSearchTest");
-        FlightSearchPage flightsSearchPage = new FlightSearchPage(driver);
+        //ExtentReportUtils.getTest().info("Verify flightsSearchTest");
+        this.flightsSearchPage = new FlightSearchPage(driver);
         Assert.assertTrue(flightsSearchPage.isAt());
         flightsSearchPage.selectPassengers(testData.passengersCount());
         flightsSearchPage.searchFlights();
-        ExtentReportUtils.getTest().pass("User flightsSearchTest pass");
+        //ExtentReportUtils.getTest().pass("User flightsSearchTest pass");
     }
 
     @Test(dependsOnMethods = "flightsSearchTest")
@@ -69,12 +74,12 @@ public class FlightRegistrationTest extends BaseTest {
         userRegistrationTest();
         registrationConfirmationTest();
         flightsSearchTest();
-        ExtentReportUtils.getTest().info("Verify flightsSelectionTest");
-        FlightSelectionPage flightsSelectionPage = new FlightSelectionPage(driver);
+        //ExtentReportUtils.getTest().info("Verify flightsSelectionTest");
+        this.flightsSelectionPage = new FlightSelectionPage(driver);
         Assert.assertTrue(flightsSelectionPage.isAt());
         flightsSelectionPage.selectFlights();
         flightsSelectionPage.confirmFlights();
-        ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
+        //ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
     }
 
     @Test(dependsOnMethods = "flightsSelectionTest")
@@ -83,11 +88,11 @@ public class FlightRegistrationTest extends BaseTest {
         registrationConfirmationTest();
         flightsSearchTest();
         flightsSelectionTest();
-        ExtentReportUtils.getTest().info("Verify flightReservationConfirmationTest");
-        FlightConfirmationPage flightConfirmationPage = new FlightConfirmationPage(driver);
+        //ExtentReportUtils.getTest().info("Verify flightReservationConfirmationTest");
+        this.flightConfirmationPage = new FlightConfirmationPage(driver);
         Assert.assertTrue(flightConfirmationPage.isAt());
         Assert.assertEquals(flightConfirmationPage.getPrice(), testData.expectedPrice());
-        ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
+        //ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
     }
 
 }

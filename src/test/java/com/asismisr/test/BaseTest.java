@@ -32,9 +32,6 @@ public abstract class BaseTest {
     private static Logger log =  LoggerFactory.getLogger(BaseTest.class);
     protected WebDriver driver;
 
-
-
-
     @BeforeSuite
     public void setupConfigurations(){
 
@@ -42,7 +39,7 @@ public abstract class BaseTest {
         Config.initializeProperties();
 
         // initialising the extent report
-        ExtentReportUtils.initializeExtentReport();
+//        ExtentReportUtils.initializeExtentReport();
     }
 
     @BeforeMethod
@@ -54,7 +51,7 @@ public abstract class BaseTest {
         }
 
         // Start a new test
-        ExtentReportUtils.startTest(method.getName());
+//        ExtentReportUtils.startTest(method.getName());
     }
 
 
@@ -111,9 +108,9 @@ public abstract class BaseTest {
         this.driver.quit();
 
         // Capture the test result
-        int status = iTestResult.getStatus();
-        Throwable throwable = iTestResult.getThrowable();
-        ExtentReportUtils.captureResult(status, throwable);
+//        int status = iTestResult.getStatus();
+//        Throwable throwable = iTestResult.getThrowable();
+//        ExtentReportUtils.captureResult(status, throwable);
     }
 
 //    @AfterTest
@@ -123,6 +120,6 @@ public abstract class BaseTest {
 
     @AfterSuite
     public void afterSuiteMethod(){
-        ExtentReportUtils.tearDown();
+//        ExtentReportUtils.tearDown();
     }
 }

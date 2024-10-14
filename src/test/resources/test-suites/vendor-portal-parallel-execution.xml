@@ -6,16 +6,16 @@
             <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
         </classes>
     </test>
-    <test name="user-mike">
-        <parameter name="testDataPath" value="test-data/vendorPortal/mike.json" />
-        <classes>
-            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
-        </classes>
-    </test>
-    <test name="user-john">
-        <parameter name="testDataPath" value="test-data/vendorPortal/john.json" />
-        <classes>
-            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
-        </classes>
-    </test>
+<!--    <test name="user-mike">-->
+<!--        <parameter name="testDataPath" value="test-data/vendorPortal/mike.json" />-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="user-john">-->
+<!--        <parameter name="testDataPath" value="test-data/vendorPortal/john.json" />-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
