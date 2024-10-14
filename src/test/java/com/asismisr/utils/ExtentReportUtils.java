@@ -8,7 +8,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReportUtils {
 
-    public static final String EXTENT_REPORT_PATH = System.getProperty("user.dir")+"/src/test/resources/test-results/extentReport/extentReport.html";
+    public static final String EXTENT_REPORT_PATH = "target/test-output/extent-Report/extentReport.html";
     private static ExtentReports extentReports;
     private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
     public static ExtentSparkReporter extentSparkReporter;

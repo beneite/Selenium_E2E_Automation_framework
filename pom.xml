@@ -86,15 +86,16 @@
                 <configuration>
                     <systemPropertyVariables>
 <!--                        maven clean test -Dbrowser=chrome -Dselenium.grid.enabled=true  -->
-<!--                        <browser>chrome</browser>-->
+                        <browser>chrome</browser>
 <!--                        <selenium.grid.enabled>false</selenium.grid.enabled>-->
-<!--                        <selenium.grid.enabled>true</selenium.grid.enabled>-->
+                        <selenium.grid.enabled>false</selenium.grid.enabled>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <file>test-suite.xml</file>
+                        <file>src/test/resources/test-suites/flight-reservation.xml</file>
+                        <file>src/test/resources/test-suites/vendor-portal.xml</file>
                     </suiteXmlFiles>
                     <threadCount>1</threadCount>
-                    <reportsDirectory>target/test-output</reportsDirectory>
+                    <reportsDirectory>target/test-output/testng-report</reportsDirectory>
                 </configuration>
             </plugin>
             <!-- To copy all the dependencies to run our tests as part of "mvn package" -->
