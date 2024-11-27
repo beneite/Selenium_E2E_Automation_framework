@@ -12,6 +12,13 @@
 ## Project Architecture
 ![projectArchitecture.png](src%2Ftest%2Fresources%2Fdocker%2FprojectArchitecture.png)
 
+## How to Run Test:
+1. Go to properties file and check the env variables.
+2. use command to bring the docker container for **Elastic search** up: `docker run --name elasticSearchContainer -p 9200:9200 -it --memory 1GB -e "discovery.type=single-node" -e "xpack.security.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.16.1`
+3. 
+
+
+
 ## How to run test from Target folder
 
 - Issue this command. `mvn clean package -DskipTests`. You should see `docker-resources` under `target`.

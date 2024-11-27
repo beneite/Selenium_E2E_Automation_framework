@@ -3,6 +3,7 @@ package com.asismisr.test;
 import com.asismisr.utils.Config;
 import com.asismisr.utils.Constants;
 import com.asismisr.utils.ExtentReportUtils;
+import com.asismisr.utils.ekl.PublishResults;
 import com.google.common.util.concurrent.Uninterruptibles;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Capabilities;
@@ -107,10 +108,8 @@ public abstract class BaseTest {
         // quiting the browser
         this.driver.quit();
 
-        // Capture the test result
-//        int status = iTestResult.getStatus();
-//        Throwable throwable = iTestResult.getThrowable();
-//        ExtentReportUtils.captureResult(status, throwable);
+        // this will be used to publish results.
+        PublishResults.publishResults(iTestResult);
     }
 
 //    @AfterTest
