@@ -42,21 +42,18 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdriver.manager.version}</version>
-            <scope>test</scope>
         </dependency>
         <!-- To deserialize json into Java object or vice versa -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
-            <scope>test</scope>
         </dependency>
         <!-- Test framework -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
         <dependency>
@@ -64,6 +61,13 @@
             <artifactId>extentreports</artifactId>
             <version>${extent.report.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
 
     </dependencies>
     <build>
@@ -88,7 +92,7 @@
 <!--                        maven clean test -Dbrowser=chrome -Dselenium.grid.enabled=true  -->
                         <browser>chrome</browser>
 <!--                        <selenium.grid.enabled>false</selenium.grid.enabled>-->
-                        <selenium.grid.enabled>false</selenium.grid.enabled>
+<!--                        <selenium.grid.enabled>true</selenium.grid.enabled>-->
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <file>src/test/resources/test-suites/flight-reservation.xml</file>

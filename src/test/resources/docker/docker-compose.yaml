@@ -29,28 +29,28 @@ services:
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - SE_NODE_MAX_SESSIONS=6
 
-  flight-reservation-service:
-    image: seleniumdocker:v2
-    depends_on:
-      - chrome-service
-      - firefox-service
-    environment:
-      - BROWSER=chrome
-      - HUB_HOST_IP=hub
-      - THREAD_COUNT=4
-      - TEST_SUITE=flight-reservation.xml
-    volumes:
-      - ./volumeMapping/results/flight-Reservation:/home/selenium-docker/test-output
-
-  vendor-portal-service:
-    image: seleniumdocker:v2
-    depends_on:
-      - chrome-service
-      - firefox-service
-    environment:
-      - BROWSER=firefox
-      - HUB_HOST_IP=hub
-      - THREAD_COUNT=3
-      - TEST_SUITE=vendor-portal.xml
-    volumes:
-      - ./volumeMapping/results/vendor-portal:/home/selenium-docker/test-output
+#  flight-reservation-service:
+#    image: seleniumdocker:v2
+#    depends_on:
+#      - chrome-service
+#      - firefox-service
+#    environment:
+#      - BROWSER=chrome
+#      - HUB_HOST_IP=hub
+#      - THREAD_COUNT=4
+#      - TEST_SUITE=flight-reservation.xml
+#    volumes:
+#      - ./volumeMapping/results/flight-Reservation:/home/selenium-docker/test-output
+#
+#  vendor-portal-service:
+#    image: seleniumdocker:v2
+#    depends_on:
+#      - chrome-service
+#      - firefox-service
+#    environment:
+#      - BROWSER=firefox
+#      - HUB_HOST_IP=hub
+#      - THREAD_COUNT=3
+#      - TEST_SUITE=vendor-portal.xml
+#    volumes:
+#      - ./volumeMapping/results/vendor-portal:/home/selenium-docker/test-output
