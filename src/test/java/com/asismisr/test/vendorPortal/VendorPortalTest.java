@@ -1,12 +1,12 @@
 package com.asismisr.test.vendorPortal;
 
+import com.asismisr.configs.Config;
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
 import com.asismisr.pages.vendorPortal.userLogin.LoginPage;
 import com.asismisr.test.BaseTest;
 import com.asismisr.test.vendorPortal.model.VendorPortalTestData;
-import com.asismisr.utils.Config;
-import com.asismisr.utils.Constants;
-import com.asismisr.utils.JsonUtil;
+import com.asismisr.constants.Constants;
+import com.asismisr.utils.jsonparsing.JsonUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;

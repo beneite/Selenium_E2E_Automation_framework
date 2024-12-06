@@ -1,6 +1,7 @@
-package com.asismisr.utils;
+package com.asismisr.configs;
 
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
+import com.asismisr.utils.resourceloader.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

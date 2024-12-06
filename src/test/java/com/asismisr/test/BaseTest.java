@@ -1,8 +1,7 @@
 package com.asismisr.test;
 
-import com.asismisr.utils.Config;
-import com.asismisr.utils.Constants;
-import com.asismisr.utils.ExtentReportUtils;
+import com.asismisr.configs.Config;
+import com.asismisr.constants.Constants;
 import com.asismisr.utils.ekl.PublishResults;
 import com.google.common.util.concurrent.Uninterruptibles;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -17,16 +16,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Objects;
 
 public abstract class BaseTest {
 
@@ -39,8 +36,6 @@ public abstract class BaseTest {
         // initialising the configurations
         Config.initializeProperties();
 
-        // initialising the extent report
-//        ExtentReportUtils.initializeExtentReport();
     }
 
     @BeforeMethod
@@ -51,21 +46,8 @@ public abstract class BaseTest {
             this.driver = getLocalWebdriver();
         }
 
-        // Start a new test
-//        ExtentReportUtils.startTest(method.getName());
     }
 
-
-//    @BeforeTest
-    public void setDriver() throws MalformedURLException {
-
-//        if(Boolean.parseBoolean(Config.getTestProperty(Constants.SELENIUM_GRID_ENABLED))){
-//            this.driver = getRemoteWebDriver();
-//        }else{
-//            this.driver = getLocalWebdriver();
-//        }
-
-    }
 
     public WebDriver getRemoteWebDriver() throws MalformedURLException {
 
@@ -105,20 +87,14 @@ public abstract class BaseTest {
             Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
         }
 
-        // quiting the browser
-        this.driver.quit();
+        // quiting the browser if it is !NULL
+        if(Objects.nonNull(driver)){
+            this.driver.quit();
+        }
+
 
         // this will be used to publish results.
         PublishResults.publishResults(iTestResult);
     }
 
-//    @AfterTest
-    public void quitDriver() {
-//        this.driver.quit();
-    }
-
-    @AfterSuite
-    public void afterSuiteMethod(){
-//        ExtentReportUtils.tearDown();
-    }
 }

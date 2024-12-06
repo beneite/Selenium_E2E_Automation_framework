@@ -1,5 +1,6 @@
 package com.asismisr.test.flightRegistration;
 
+import com.asismisr.configs.Config;
 import com.asismisr.pages.flightRegistration.flightConfirmation.FlightConfirmationPage;
 import com.asismisr.pages.flightRegistration.flightSearch.FlightSearchPage;
 import com.asismisr.pages.flightRegistration.flightSelection.FlightSelectionPage;
@@ -7,10 +8,8 @@ import com.asismisr.pages.flightRegistration.registrationConfirmation.Registrati
 import com.asismisr.test.BaseTest;
 import com.asismisr.test.flightRegistration.model.FlightReservationTestData;
 import com.asismisr.pages.flightRegistration.customerRegistration.CustomerRegistrationPage;
-import com.asismisr.utils.Config;
-import com.asismisr.utils.Constants;
-import com.asismisr.utils.ExtentReportUtils;
-import com.asismisr.utils.JsonUtil;
+import com.asismisr.constants.Constants;
+import com.asismisr.utils.jsonparsing.JsonUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
