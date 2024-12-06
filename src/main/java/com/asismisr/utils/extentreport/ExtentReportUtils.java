@@ -1,8 +1,9 @@
-package com.asismisr.utils;
+package com.asismisr.utils.extentreport;
 
+import com.asismisr.configs.Config;
+import com.asismisr.constants.Constants;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 

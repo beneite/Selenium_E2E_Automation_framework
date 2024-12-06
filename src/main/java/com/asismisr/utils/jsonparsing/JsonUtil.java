@@ -1,5 +1,6 @@
-package com.asismisr.utils;
+package com.asismisr.utils.jsonparsing;
 
+import com.asismisr.utils.resourceloader.ResourceLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

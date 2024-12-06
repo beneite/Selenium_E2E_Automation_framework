@@ -1,4 +1,4 @@
-package com.asismisr.utils;
+package com.asismisr.utils.resourceloader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
