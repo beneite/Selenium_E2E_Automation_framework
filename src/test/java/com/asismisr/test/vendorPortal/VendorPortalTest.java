@@ -12,7 +12,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class VendorPortalTest extends BaseTest {
+// making the test class final so that it should not be inherited
+public final class VendorPortalTest extends BaseTest {
+
+    private VendorPortalTest(){}
 
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
