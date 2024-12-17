@@ -29,7 +29,6 @@ import java.util.Objects;
 public abstract class BaseTest {
 
     private static Logger log =  LoggerFactory.getLogger(BaseTest.class);
-    protected WebDriver driver;
 
     @BeforeSuite
     public void setupConfigurations(){
@@ -41,12 +40,13 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void setUpTestMethod(Method method) throws MalformedURLException {
+        WebDriver driver;
         if(Boolean.parseBoolean(Config.getTestProperty(Constants.SELENIUM_GRID_ENABLED))){
-            this.driver = getRemoteWebDriver();
+             driver = getRemoteWebDriver();
         }else{
-            this.driver = getLocalWebdriver();
+             driver = getLocalWebdriver();
         }
-
+        DriverManager.setWebDriverThreadLocal(driver);
     }
 
 
@@ -89,8 +89,9 @@ public abstract class BaseTest {
         }
 
         // quiting the browser if it is !NULL
-        if(Objects.nonNull(driver)){
-            this.driver.quit();
+        if(Objects.nonNull(DriverManager.getWebDriverFromThreadLocal())){
+            DriverManager.getWebDriverFromThreadLocal().quit();
+            DriverManager.unloadWebDriverThreadLocal();
         }
 
 
