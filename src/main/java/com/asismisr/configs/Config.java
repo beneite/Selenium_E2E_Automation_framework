@@ -30,14 +30,14 @@ public final class Config {
         // overriding the default properties
         for(String key : properties.stringPropertyNames()){
             if(System.getProperties().containsKey(key)){
-                properties.setProperty(key, System.getProperty(key));
+                properties.setProperty(key, System.getProperty(key).trim());
             }
         }
 
         // printing the properties
-        log.info("Below the properties for test");
+        log.info("Below the properties for test:");
         for(String key : properties.stringPropertyNames()){
-            log.info(key + ":" + properties.getProperty(key));
+            log.info("{}:{}",key,properties.getProperty(key));
         }
     }
 

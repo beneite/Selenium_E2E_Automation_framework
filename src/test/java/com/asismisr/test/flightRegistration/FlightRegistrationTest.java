@@ -1,7 +1,6 @@
 package com.asismisr.test.flightRegistration;
 
 import com.asismisr.configs.Config;
-import com.asismisr.drivermanagement.DriverManager;
 import com.asismisr.pages.flightRegistration.flightConfirmation.FlightConfirmationPage;
 import com.asismisr.pages.flightRegistration.flightSearch.FlightSearchPage;
 import com.asismisr.pages.flightRegistration.flightSelection.FlightSelectionPage;
@@ -26,7 +25,6 @@ public final class FlightRegistrationTest extends BaseTest {
     }
 
     private FlightReservationTestData testData;
-    private CustomerRegistrationPage registrationPage;
     private RegistrationConfirmationPage registrationConfirmationPage;
     private FlightSearchPage flightsSearchPage;
     private FlightSelectionPage flightsSelectionPage;
@@ -41,15 +39,15 @@ public final class FlightRegistrationTest extends BaseTest {
     @Test
     public void userRegistrationTest(){
 //        //ExtentReportUtils.getTest().info("Verify userRegistrationTest");
-        this.registrationPage = new CustomerRegistrationPage(DriverManager.getWebDriverFromThreadLocal());
-        registrationPage.goTo(Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
+        CustomerRegistrationPage customerRegistrationPage = new CustomerRegistrationPage();
+        customerRegistrationPage.goTo(Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
 //        //ExtentReportUtils.getTest().info("Navigating to URL:"+Config.getTestProperty(Constants.FLIGHT_RESERVATION_URL));
-        Assert.assertTrue(registrationPage.isAt());
+        Assert.assertTrue(customerRegistrationPage.isAt());
 
-        registrationPage.enterUserDetails(testData.firstName(), testData.lastName());
-        registrationPage.enterUserCredentials(testData.email(), testData.password());
-        registrationPage.enterAddress(testData.street(), testData.city(), testData.zip());
-        registrationPage.register();
+        customerRegistrationPage.enterUserDetails(testData.firstName(), testData.lastName());
+        customerRegistrationPage.enterUserCredentials(testData.email(), testData.password());
+        customerRegistrationPage.enterAddress(testData.street(), testData.city(), testData.zip());
+        customerRegistrationPage.register();
         //ExtentReportUtils.getTest().pass("User successfully registered");
     }
 
@@ -57,7 +55,7 @@ public final class FlightRegistrationTest extends BaseTest {
     public void registrationConfirmationTest(){
         userRegistrationTest();
         //ExtentReportUtils.getTest().info("Verify registrationConfirmationTest");
-        this.registrationConfirmationPage = new RegistrationConfirmationPage(DriverManager.getWebDriverFromThreadLocal());
+        this.registrationConfirmationPage = new RegistrationConfirmationPage();
         Assert.assertTrue(registrationConfirmationPage.isAt());
         Assert.assertEquals(registrationConfirmationPage.getFirstName(), testData.firstName());
         registrationConfirmationPage.goToFlightsSearch();
@@ -69,7 +67,7 @@ public final class FlightRegistrationTest extends BaseTest {
         userRegistrationTest();
         registrationConfirmationTest();
         //ExtentReportUtils.getTest().info("Verify flightsSearchTest");
-        this.flightsSearchPage = new FlightSearchPage(DriverManager.getWebDriverFromThreadLocal());
+        this.flightsSearchPage = new FlightSearchPage();
         Assert.assertTrue(flightsSearchPage.isAt());
         flightsSearchPage.selectPassengers(testData.passengersCount());
         flightsSearchPage.searchFlights();
@@ -82,7 +80,7 @@ public final class FlightRegistrationTest extends BaseTest {
         registrationConfirmationTest();
         flightsSearchTest();
         //ExtentReportUtils.getTest().info("Verify flightsSelectionTest");
-        this.flightsSelectionPage = new FlightSelectionPage(DriverManager.getWebDriverFromThreadLocal());
+        this.flightsSelectionPage = new FlightSelectionPage();
         Assert.assertTrue(flightsSelectionPage.isAt());
         flightsSelectionPage.selectFlights();
         flightsSelectionPage.confirmFlights();
@@ -96,7 +94,7 @@ public final class FlightRegistrationTest extends BaseTest {
         flightsSearchTest();
         flightsSelectionTest();
         //ExtentReportUtils.getTest().info("Verify flightReservationConfirmationTest");
-        this.flightConfirmationPage = new FlightConfirmationPage(DriverManager.getWebDriverFromThreadLocal());
+        this.flightConfirmationPage = new FlightConfirmationPage();
         Assert.assertTrue(flightConfirmationPage.isAt());
         Assert.assertEquals(flightConfirmationPage.getPrice(), testData.expectedPrice());
         //ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");

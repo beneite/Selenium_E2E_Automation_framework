@@ -1,3 +1,7 @@
+Assert J
+remove page factory
+base page should have common dom element interaction elements (make them protected), add explicit wait
+
 # Application URLs
 
 - [Flight Reservation](https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/reservation-app/index.html)

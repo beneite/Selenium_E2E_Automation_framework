@@ -1,7 +1,6 @@
 package com.asismisr.test.vendorPortal;
 
 import com.asismisr.configs.Config;
-import com.asismisr.drivermanagement.DriverManager;
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
 import com.asismisr.pages.vendorPortal.userLogin.LoginPage;
 import com.asismisr.test.BaseTest;
@@ -31,7 +30,7 @@ public final class VendorPortalTest extends BaseTest {
 
     @Test
     public void loginTest(){
-        this.loginPage = new LoginPage(DriverManager.getWebDriverFromThreadLocal());
+        this.loginPage = new LoginPage();
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         Assert.assertTrue(loginPage.isAt());
         loginPage.login(testData.username(), testData.password());
@@ -40,7 +39,7 @@ public final class VendorPortalTest extends BaseTest {
     @Test(dependsOnMethods = "loginTest")
     public void dashboardTest(){
         loginTest();
-        this.dashboardPage = new DashboardPage(DriverManager.getWebDriverFromThreadLocal());
+        this.dashboardPage = new DashboardPage();
         Assert.assertTrue(dashboardPage.isAt());
 
         // finance metrics

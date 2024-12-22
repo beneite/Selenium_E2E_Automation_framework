@@ -1,33 +1,26 @@
 package com.asismisr.pages.flightRegistration.registrationConfirmation;
 
-import com.asismisr.pages.flightRegistration.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.asismisr.pages.BasePage;
+import org.openqa.selenium.By;
 
-public class RegistrationConfirmationPage extends BasePage {
-    @FindBy(id = "go-to-flights-search")
-    private WebElement goToFlightsSearchButton;
+public final class RegistrationConfirmationPage extends BasePage {
 
-    @FindBy(css = "#registration-confirmation-section p b")
-    private WebElement firstNameElement;
+    private final By GO_TO_FLIGHTS_SEARCH_BUTTON = By.xpath("//*[@id='go-to-flights-search']");
+    private final By FIRST_NAME_ELEMENT = By.xpath("//*[@id='registration-confirmation-section']//p//b");
 
-    public RegistrationConfirmationPage(WebDriver driver){
-        super(driver);
+
+    public RegistrationConfirmationPage(){
     }
 
-    @Override
     public boolean isAt() {
-        this.wait.until(ExpectedConditions.visibilityOf(this.goToFlightsSearchButton));
-        return this.goToFlightsSearchButton.isDisplayed();
+        return isElementVisible(GO_TO_FLIGHTS_SEARCH_BUTTON);
     }
 
     public String getFirstName(){
-        return this.firstNameElement.getText();
+        return getText(FIRST_NAME_ELEMENT);
     }
 
     public void goToFlightsSearch(){
-        this.goToFlightsSearchButton.click();
+        clickElement(GO_TO_FLIGHTS_SEARCH_BUTTON);
     }
 }

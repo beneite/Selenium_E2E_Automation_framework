@@ -1,73 +1,50 @@
 package com.asismisr.pages.vendorPortal.dashboard;
 
-import com.asismisr.pages.vendorPortal.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.asismisr.pages.BasePage;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DashboardPage extends BasePage {
+public final class DashboardPage extends BasePage {
 
     private static final Logger log = LoggerFactory.getLogger(DashboardPage.class);
 
-    @FindBy(id = "monthly-earning")
-    private WebElement monthlyEarningElement;
+    private static final By MONTHLY_EARNING_ELEMENT = By.id("monthly-earning");
+    private static final By ANNUAL_EARNING_ELEMENT = By.id("annual-earning");
+    private static final By PROFIT_MARGIN_ELEMENT = By.id("profit-margin");
+    private static final By AVAILABLE_INVENTORY_ELEMENT = By.id("available-inventory");
+    private static final By SEARCH_INPUT = By.cssSelector("#dataTable_filter input");
+    private static final By SEARCH_RESULTS_COUNT_ELEMENT = By.id("dataTable_info");
+    private static final By USER_PROFILE_PICTURE_ELEMENT = By.cssSelector("img.img-profile");
+    private static final By LOGOUT_LINK = By.linkText("Logout");
+    private static final By MODAL_LOGOUT_BUTTON = By.cssSelector("#logoutModal a");
 
-    @FindBy(id = "annual-earning")
-    private WebElement annualEarningElement;
 
-    @FindBy(id = "profit-margin")
-    private WebElement profitMarginElement;
-
-    @FindBy(id = "available-inventory")
-    private WebElement availableInventoryElement;
-
-    @FindBy(css = "#dataTable_filter input")
-    private WebElement searchInput;
-
-    @FindBy(id = "dataTable_info")
-    private WebElement searchResultsCountElement;
-
-    @FindBy(css = "img.img-profile")
-    private WebElement userProfilePictureElement;
-
-    // prefer id / name / css
-    @FindBy(linkText = "Logout")
-    private WebElement logoutLink;
-
-    @FindBy(css = "#logoutModal a")
-    private WebElement modalLogoutButton;
-
-    public DashboardPage(WebDriver driver) {
-        super(driver);
+    public DashboardPage() {
     }
 
-    @Override
     public boolean isAt() {
-        this.wait.until(ExpectedConditions.visibilityOf(this.monthlyEarningElement));
-        return this.monthlyEarningElement.isDisplayed();
+        return isElementVisible(MONTHLY_EARNING_ELEMENT);
     }
 
     public String getMonthlyEarning(){
-        return this.monthlyEarningElement.getText();
+        return getText(MONTHLY_EARNING_ELEMENT);
     }
 
     public String getAnnualEarning(){
-        return this.annualEarningElement.getText();
+        return getText(ANNUAL_EARNING_ELEMENT);
     }
 
     public String getProfitMargin(){
-        return this.profitMarginElement.getText();
+        return getText(PROFIT_MARGIN_ELEMENT);
     }
 
     public String getAvailableInventory(){
-        return this.availableInventoryElement.getText();
+        return getText(AVAILABLE_INVENTORY_ELEMENT);
     }
 
     public void searchOrderHistoryBy(String keyword){
-        this.searchInput.sendKeys(keyword);
+        sendElement(SEARCH_INPUT, keyword);
     }
 
     /*
@@ -82,7 +59,7 @@ public class DashboardPage extends BasePage {
         ...
      */
     public int getSearchResultsCount(){
-        String resultsText = this.searchResultsCountElement.getText();
+        String resultsText = getText(SEARCH_RESULTS_COUNT_ELEMENT);
         String[] arr = resultsText.split(" ");
         // if we do not have 5th item, it would throw exception.
         // that's fine. we would want our test to fail anyway in that case!
@@ -92,11 +69,11 @@ public class DashboardPage extends BasePage {
     }
 
     public void logout(){
-        this.userProfilePictureElement.click();
-        this.wait.until(ExpectedConditions.visibilityOf(this.logoutLink));
-        this.logoutLink.click();
-        this.wait.until(ExpectedConditions.visibilityOf(this.modalLogoutButton));
-        this.modalLogoutButton.click();
+        clickElement(USER_PROFILE_PICTURE_ELEMENT);
+        isElementVisible(LOGOUT_LINK);
+        clickElement(LOGOUT_LINK);
+        isElementVisible(MODAL_LOGOUT_BUTTON);
+        clickElement(MODAL_LOGOUT_BUTTON);
     }
 
 }

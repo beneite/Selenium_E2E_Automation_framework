@@ -1,68 +1,46 @@
 package com.asismisr.pages.flightRegistration.customerRegistration;
 
-import com.asismisr.pages.flightRegistration.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.asismisr.pages.BasePage;
+import org.openqa.selenium.By;
 
-public class CustomerRegistrationPage extends BasePage {
+public final class CustomerRegistrationPage extends BasePage {
 
-    @FindBy(id = "firstName")
-    private WebElement firstNameInput;
+    private final By FIRST_NAME_INPUT = By.xpath("//*[@id='firstName']");
+    private final By LAST_NAME_INPUT = By.xpath("//*[@id='lastName']");
+    private final By EMAIL_INPUT = By.xpath("//*[@id='email']");
+    private final By PASSWORD_INPUT = By.xpath("//*[@id='password']");
+    private final By STREET_INPUT = By.xpath("//*[@name='street']");
+    private final By CITY_INPUT = By.xpath("//*[@name='city']");
+    private final By ZIP_INPUT = By.xpath("//*[@name='zip']");
+    private final By REGISTER_BUTTON = By.xpath("//*[@id='register-btn']");
 
-    @FindBy(id = "lastName")
-    private WebElement lastNameInput;
+    public CustomerRegistrationPage(){}
 
-    @FindBy(id = "email")
-    private WebElement emailInput;
-
-    @FindBy(id = "password")
-    private WebElement passwordInput;
-
-    @FindBy(name = "street")
-    private WebElement streetInput;
-
-    @FindBy(name = "city")
-    private WebElement cityInput;
-
-    @FindBy(name = "zip")
-    private WebElement zipInput;
-
-    @FindBy(id = "register-btn")
-    private WebElement registerButton;
-
-    public CustomerRegistrationPage(WebDriver driver){
-        super(driver);
-    }
-
-    @Override
     public boolean isAt() {
-        this.wait.until(ExpectedConditions.visibilityOf(this.firstNameInput));
-        return this.firstNameInput.isDisplayed();
+        return isElementVisible(FIRST_NAME_INPUT);
     }
 
     public void goTo(String url){
-        this.driver.get(url);
+        goToUrl(url);
     }
 
     public void enterUserDetails(String firstName, String lastName){
-        this.firstNameInput.sendKeys(firstName);
-        this.lastNameInput.sendKeys(lastName);
+        sendElement(FIRST_NAME_INPUT, firstName);
+        sendElement(LAST_NAME_INPUT, lastName);
     }
 
     public void enterUserCredentials(String email, String password){
-        this.emailInput.sendKeys(email);
-        this.passwordInput.sendKeys(password);
+        sendElement(EMAIL_INPUT, email);
+        sendElement(PASSWORD_INPUT, password);
     }
 
     public void enterAddress(String street, String city, String zip){
-        this.streetInput.sendKeys(street);
-        this.cityInput.sendKeys(city);
-        this.zipInput.sendKeys(zip);
+        sendElement(STREET_INPUT, street);
+        sendElement(CITY_INPUT, city);
+        sendElement(ZIP_INPUT, zip);
     }
 
     public void register(){
-        this.registerButton.click();
+        clickElement(REGISTER_BUTTON);
     }
 }
