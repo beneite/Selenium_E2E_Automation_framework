@@ -31,7 +31,7 @@ public abstract class BaseTest {
     private static Logger log =  LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeSuite
-    public void setupConfigurations(){
+    protected void setupConfigurations(){
 
         // initialising the configurations
         Config.initializeProperties();
@@ -39,7 +39,7 @@ public abstract class BaseTest {
     }
 
     @BeforeMethod
-    public void setUpTestMethod(Method method) throws MalformedURLException {
+    protected void setUpTestMethod(Method method) throws MalformedURLException {
         WebDriver driver;
         if(Boolean.parseBoolean(Config.getTestProperty(Constants.SELENIUM_GRID_ENABLED))){
              driver = getRemoteWebDriver();
@@ -50,7 +50,7 @@ public abstract class BaseTest {
     }
 
 
-    public WebDriver getRemoteWebDriver() throws MalformedURLException {
+    private WebDriver getRemoteWebDriver() throws MalformedURLException {
 
         Capabilities capabilities ;
 
@@ -67,7 +67,7 @@ public abstract class BaseTest {
     }
 
 
-    public WebDriver getLocalWebdriver() {
+    private WebDriver getLocalWebdriver() {
         switch (Config.getTestProperty(Constants.BROWSER)) {
             case Constants.CHROME -> {
                 WebDriverManager.chromedriver().setup();
@@ -83,7 +83,7 @@ public abstract class BaseTest {
     }
 
     @AfterMethod
-    public void addingSleepBetweenTestCaseExecution(ITestResult iTestResult){
+    protected void addingSleepBetweenTestCaseExecution(ITestResult iTestResult){
         if(Boolean.parseBoolean(Config.getTestProperty(Constants.SELENIUM_GRID_ENABLED))){
             Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
         }

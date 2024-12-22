@@ -1,16 +1,20 @@
 package com.asismisr.configs;
 
-import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
 import com.asismisr.utils.resourceloader.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Properties;
 
-public class Config {
+public final class Config {
 
-    private static final Logger log = LoggerFactory.getLogger(DashboardPage.class);
+    private Config(){
+
+    }
+
+    private static final Logger log = LoggerFactory.getLogger(Config.class);
     private static final String CONFIG_FILE_LOCATION = "config/default.properties";
     private static Properties properties;
 
@@ -43,7 +47,10 @@ public class Config {
      * @return property value
      */
     public static String getTestProperty(String key){
-        return properties.getProperty(key);
+        String value = properties.getProperty(key);
+        if(Objects.isNull(value))
+            log.warn("Value for {} not found in default.properties file.", key);
+        return value;
     }
 
     public static Properties loadProperties(){

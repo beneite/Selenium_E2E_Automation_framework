@@ -1,6 +1,11 @@
 package com.asismisr.constants;
 
-public class Constants {
+public final class Constants {
+
+    private Constants(){
+        // restricting the object creation for constants class
+
+    }
 
     public static final String SELENIUM_GRID_ENABLED = "selenium.grid.enabled";
     public static final String SELENIUM_GRID_URL_FORMAT = "selenium.grid.urlFormat";
