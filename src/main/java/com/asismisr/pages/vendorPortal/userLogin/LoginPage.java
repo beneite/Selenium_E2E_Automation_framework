@@ -1,41 +1,31 @@
 package com.asismisr.pages.vendorPortal.userLogin;
 
-import com.asismisr.pages.vendorPortal.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.asismisr.pages.BasePage;
+import org.openqa.selenium.By;
 
 
-public class LoginPage extends BasePage {
+public final class LoginPage extends BasePage {
 
-    @FindBy(id = "username")
-    private WebElement usernameInput;
+    private static final By USERNAME_INPUT = By.xpath("//*[@id='username']");
+    private static final By PASSWORD_INPUT = By.xpath("//*[@id='password']");
+    private static final By LOGIN_BUTTON = By.xpath("//*[@id='login']");
 
-    @FindBy(id = "password")
-    private WebElement passwordInput;
 
-    @FindBy(id = "login")
-    private WebElement loginButton;
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
+    public LoginPage() {
     }
 
-    @Override
     public boolean isAt() {
-        this.wait.until(ExpectedConditions.visibilityOf(this.loginButton));
-        return this.loginButton.isDisplayed();
+        return isElementVisible(LOGIN_BUTTON);
     }
 
     public void goTo(String url){
-        this.driver.get(url);
+        goToUrl(url);
     }
 
     public void login(String username, String password){
-        this.usernameInput.sendKeys(username);
-        this.passwordInput.sendKeys(password);
-        this.loginButton.click();
+        sendElement(USERNAME_INPUT, username);
+        sendElement(PASSWORD_INPUT, password);
+        clickElement(LOGIN_BUTTON);
     }
 
 }

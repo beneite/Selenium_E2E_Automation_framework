@@ -1,36 +1,26 @@
 package com.asismisr.pages.flightRegistration.flightSearch;
 
-import com.asismisr.pages.flightRegistration.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
+import com.asismisr.pages.BasePage;
+import org.openqa.selenium.By;
 
-public class FlightSearchPage extends BasePage {
+public final class FlightSearchPage extends BasePage {
 
-    @FindBy(id = "passengers")
-    private WebElement passengerSelect;
+    private static final By PASSENGER_SELECT = By.xpath("//*[@id='passengers']");
+    private static final By SEARCH_FLIGHTS_BUTTON = By.xpath("//*[@id='search-flights']");
 
-    @FindBy(id = "search-flights")
-    private WebElement searchFlightsButton;
 
-    public FlightSearchPage(WebDriver driver) {
-        super(driver);
+    public FlightSearchPage() {
     }
 
-    @Override
     public boolean isAt() {
-        this.wait.until(ExpectedConditions.visibilityOf(this.passengerSelect));
-        return this.passengerSelect.isDisplayed();
+        return isElementVisible(PASSENGER_SELECT);
     }
 
     public void selectPassengers(String noOfPassengers){
-        Select passengers = new Select(this.passengerSelect);
-        passengers.selectByValue(noOfPassengers);
+        selectByDropDownValue(PASSENGER_SELECT, noOfPassengers);
     }
 
     public void searchFlights(){
-        this.searchFlightsButton.click();
+        clickElement(SEARCH_FLIGHTS_BUTTON);
     }
 }
