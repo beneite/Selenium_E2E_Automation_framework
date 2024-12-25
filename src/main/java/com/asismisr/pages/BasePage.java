@@ -4,6 +4,8 @@
 package com.asismisr.pages;
 
 import com.asismisr.drivermanagement.DriverManager;
+import com.asismisr.enums.WaitStrategy;
+import com.asismisr.factory.ExplicitWaitImplementation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -62,5 +64,25 @@ public class BasePage {
     protected void clickWebElement(WebElement webElement){
         webElement.click();
         log.info("{} Element Clicked by WebElement", webElement.toString());
+    }
+
+    /**
+     * this method will apply explicit wait before performing click operation
+     * @param by by
+     * @param waitStrategy can be VISIBLE,CLICKABLE,ISPRESENT;
+     */
+    protected void clickElementWithWait(By by, WaitStrategy waitStrategy){
+        ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategy).click();
+        log.info("{} Element Clicked", by.toString());
+    }
+
+    /**
+     * this method will apply explicit wait before performing sendKeys operation
+     * @param by by
+     * @param waitStrategy can be VISIBLE,CLICKABLE,ISPRESENT;
+     */
+    protected void sendElementWithWait(By by, String textToField, WaitStrategy waitStrategy){
+        ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategy).sendKeys(textToField);
+        log.info("{} Text Entered is {}", by.toString(), textToField);
     }
 }
