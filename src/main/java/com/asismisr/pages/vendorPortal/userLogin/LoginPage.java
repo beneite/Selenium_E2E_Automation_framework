@@ -1,5 +1,6 @@
 package com.asismisr.pages.vendorPortal.userLogin;
 
+import com.asismisr.enums.WaitStrategy;
 import com.asismisr.pages.BasePage;
 import org.openqa.selenium.By;
 
@@ -23,9 +24,9 @@ public final class LoginPage extends BasePage {
     }
 
     public void login(String username, String password){
-        sendElement(USERNAME_INPUT, username);
-        sendElement(PASSWORD_INPUT, password);
-        clickElement(LOGIN_BUTTON);
+        sendElementWithWait(USERNAME_INPUT, username, WaitStrategy.ISPRESENT);
+        sendElementWithWait(PASSWORD_INPUT, password, WaitStrategy.ISPRESENT);
+        clickElementWithWait(LOGIN_BUTTON, WaitStrategy.CLICKABLE);
     }
 
 }
