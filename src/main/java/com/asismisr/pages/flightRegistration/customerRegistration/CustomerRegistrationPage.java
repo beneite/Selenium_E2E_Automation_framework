@@ -1,6 +1,6 @@
 package com.asismisr.pages.flightRegistration.customerRegistration;
 
-import com.asismisr.enums.WaitStrategy;
+import com.asismisr.enums.WaitStrategyEnums;
 import com.asismisr.pages.BasePage;
 import org.openqa.selenium.By;
 
@@ -26,8 +26,8 @@ public final class CustomerRegistrationPage extends BasePage {
     }
 
     public void enterUserDetails(String firstName, String lastName){
-        sendElementWithWait(FIRST_NAME_INPUT, firstName, WaitStrategy.ISPRESENT);
-        sendElementWithWait(LAST_NAME_INPUT, lastName, WaitStrategy.ISPRESENT);
+        sendElementWithWait(FIRST_NAME_INPUT, firstName, WaitStrategyEnums.ISPRESENT);
+        sendElementWithWait(LAST_NAME_INPUT, lastName, WaitStrategyEnums.ISPRESENT);
     }
 
     public void enterUserCredentials(String email, String password){
@@ -42,6 +42,6 @@ public final class CustomerRegistrationPage extends BasePage {
     }
 
     public void register(){
-        clickElementWithWait(REGISTER_BUTTON, WaitStrategy.CLICKABLE);
+        clickElementWithWait(REGISTER_BUTTON, WaitStrategyEnums.CLICKABLE);
     }
 }
