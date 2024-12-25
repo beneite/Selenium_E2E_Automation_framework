@@ -3,6 +3,7 @@ package com.asismisr.test;
 import com.asismisr.configs.Config;
 import com.asismisr.constants.Constants;
 import com.asismisr.drivermanagement.DriverManager;
+import com.asismisr.enums.BrowserEnums;
 import com.asismisr.utils.ekl.PublishResults;
 import com.google.common.util.concurrent.Uninterruptibles;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -10,6 +11,8 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -51,13 +54,13 @@ public abstract class BaseTest {
 
 
     private WebDriver getRemoteWebDriver() throws MalformedURLException {
-
+        String configBrowserType = Config.getTestProperty(Constants.BROWSER);
         Capabilities capabilities ;
-
-        switch (Config.getTestProperty(Constants.BROWSER)) {
-            case "chrome" -> capabilities = new ChromeOptions();
-            case "firefox" -> capabilities = new FirefoxOptions();
-            default -> throw new IllegalArgumentException("Browser type not supported");
+        switch (BrowserEnums.valueOf(configBrowserType.toUpperCase())) {
+            case CHROME -> capabilities = new ChromeOptions();
+            case FIREFOX -> capabilities = new FirefoxOptions();
+            case EDGE -> capabilities = new EdgeOptions();
+            default -> throw new IllegalArgumentException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
         }
         String seleniumHubUrlFormat = Config.getTestProperty(Constants.SELENIUM_GRID_URL_FORMAT);
         String seleniumGridHubHost = Config.getTestProperty(Constants.SELENIUM_GRID_HUB_HOST);
@@ -68,14 +71,19 @@ public abstract class BaseTest {
 
 
     private WebDriver getLocalWebdriver() {
-        switch (Config.getTestProperty(Constants.BROWSER)) {
-            case Constants.CHROME -> {
+        String configBrowserType = Config.getTestProperty(Constants.BROWSER);
+        switch (BrowserEnums.valueOf(configBrowserType.toUpperCase())) {
+            case CHROME -> {
                 WebDriverManager.chromedriver().setup();
                 return new ChromeDriver();
             }
-            case Constants.FIREFOX -> {
+            case FIREFOX -> {
                 WebDriverManager.firefoxdriver().setup();
                 return new FirefoxDriver();
+            }
+            case EDGE -> {
+                WebDriverManager.edgedriver().setup();
+                return new EdgeDriver();
             }
             default -> throw new IllegalArgumentException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
         }

@@ -1,6 +1,6 @@
 package com.asismisr.enums;
 
-public enum WaitStrategy {
+public enum WaitStrategyEnums {
 
     VISIBLE,
     CLICKABLE,
