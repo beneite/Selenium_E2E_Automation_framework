@@ -11,15 +11,16 @@ public final class ExtentReportManager {
 
     private static ThreadLocal<ExtentTest> threadLocal = new ThreadLocal<>();
 
-    public static ExtentTest getExtentTestFromThreadLocal(){
+    // access modifier should be default
+    static ExtentTest getExtentTestFromThreadLocal(){
         return threadLocal.get();
     }
 
-    public static void setExtentTestIntoThreadLocal(ExtentTest extentTest){
+    static void setExtentTestIntoThreadLocal(ExtentTest extentTest){
         threadLocal.set(extentTest);
     }
 
-    public static void unloadExtentTestFromThreadLocal(){
+    static void unloadExtentTestFromThreadLocal(){
         threadLocal.remove();
     }
 
