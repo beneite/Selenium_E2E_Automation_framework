@@ -1,5 +1,5 @@
 target/
-test-output/extent-Report/*.html
+test-output/extent-Report/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
