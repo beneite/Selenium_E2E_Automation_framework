@@ -5,6 +5,7 @@ import com.asismisr.constants.Constants;
 import com.asismisr.drivermanagement.DriverManager;
 import com.asismisr.enums.BrowserEnums;
 import com.asismisr.utils.ekl.PublishResults;
+import com.asismisr.utils.extentreport.ExtentReportUtils;
 import com.google.common.util.concurrent.Uninterruptibles;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Capabilities;
@@ -20,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -38,6 +40,9 @@ public abstract class BaseTest {
 
         // initialising the configurations
         Config.initializeProperties();
+
+        // initializing the extent report
+        ExtentReportUtils.initializeExtentReport();
 
     }
 
@@ -105,6 +110,13 @@ public abstract class BaseTest {
 
         // this will be used to publish results.
         PublishResults.publishResults(iTestResult);
+    }
+
+    @AfterSuite
+    public void tearDownConfiguration(){
+
+        // flushing the extent reports.
+        ExtentReportUtils.tearDown();
     }
 
 }

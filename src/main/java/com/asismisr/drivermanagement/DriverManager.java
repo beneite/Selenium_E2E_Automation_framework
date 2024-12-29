@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 public final class DriverManager {
 
     private DriverManager(){
-        //creating a private constructor so that, user should not be able to create an object for driver manager class.
+        // making this private to restrict the object creation.
+        // making class as final to restrict class getting extended.
     }
 
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
