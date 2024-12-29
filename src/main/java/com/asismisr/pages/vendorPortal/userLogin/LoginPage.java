@@ -2,7 +2,7 @@ package com.asismisr.pages.vendorPortal.userLogin;
 
 import com.asismisr.enums.WaitStrategyEnums;
 import com.asismisr.pages.BasePage;
-import com.asismisr.utils.extentreport.ExtentReportManager;
+import com.asismisr.utils.extentreport.ExtentReportLogger;
 import org.openqa.selenium.By;
 
 
@@ -26,11 +26,11 @@ public final class LoginPage extends BasePage {
 
     public void login(String username, String password){
         sendElementWithWait(USERNAME_INPUT, username, WaitStrategyEnums.ISPRESENT);
-        ExtentReportManager.getExtentTestFromThreadLocal().info("USERNAME_INPUT is Entered for:"+username);
+        ExtentReportLogger.info("USERNAME_INPUT is Entered for:"+username);
         sendElementWithWait(PASSWORD_INPUT, password, WaitStrategyEnums.ISPRESENT);
-        ExtentReportManager.getExtentTestFromThreadLocal().info("PASSWORD_INPUT is Entered");
+        ExtentReportLogger.info("PASSWORD_INPUT is Entered");
         clickElementWithWait(LOGIN_BUTTON, WaitStrategyEnums.CLICKABLE);
-        ExtentReportManager.getExtentTestFromThreadLocal().info("Login button is clicked");
+        ExtentReportLogger.info("Login button is clicked");
     }
 
 }

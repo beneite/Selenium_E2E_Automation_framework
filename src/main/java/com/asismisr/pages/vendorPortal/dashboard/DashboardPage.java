@@ -1,7 +1,7 @@
 package com.asismisr.pages.vendorPortal.dashboard;
 
 import com.asismisr.pages.BasePage;
-import com.asismisr.utils.extentreport.ExtentReportManager;
+import com.asismisr.utils.extentreport.ExtentReportLogger;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ public final class DashboardPage extends BasePage {
 
     public void searchOrderHistoryBy(String keyword){
         sendElement(SEARCH_INPUT, keyword);
-        ExtentReportManager.getExtentTestFromThreadLocal().info("Passing "+keyword+" to search");
+        ExtentReportLogger.info("Passing "+keyword+" to search");
     }
 
     /*
@@ -76,7 +76,7 @@ public final class DashboardPage extends BasePage {
         clickElement(LOGOUT_LINK);
         isElementVisible(MODAL_LOGOUT_BUTTON);
         clickElement(MODAL_LOGOUT_BUTTON);
-        ExtentReportManager.getExtentTestFromThreadLocal().info("User clicked on Logout");
+        ExtentReportLogger.info("User clicked on Logout");
     }
 
 }
