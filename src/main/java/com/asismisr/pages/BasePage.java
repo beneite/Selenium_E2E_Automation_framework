@@ -6,6 +6,7 @@ package com.asismisr.pages;
 import com.asismisr.drivermanagement.DriverManager;
 import com.asismisr.enums.WaitStrategyEnums;
 import com.asismisr.factory.ExplicitWaitImplementation;
+import com.asismisr.utils.extentreport.ExtentReportLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -23,16 +24,19 @@ public class BasePage {
 
     protected void goToUrl(String url){
         DriverManager.getWebDriverFromThreadLocal().get(url);
+        ExtentReportLogger.info("URL launched:"+url);
         log.info("Navigating to URL: {}", url);
     }
 
     protected void clickElement(By by){
         DriverManager.getWebDriverFromThreadLocal().findElement(by).click();
+        ExtentReportLogger.info("Element Clicked:"+ by.toString());
         log.info("{} Element Clicked", by.toString());
     }
 
     protected void sendElement(By by, String textToField){
         DriverManager.getWebDriverFromThreadLocal().findElement(by).sendKeys(textToField);
+        ExtentReportLogger.info(by.toString()+" Text Entered is "+ textToField);
         log.info("{} Text Entered is {}", by.toString(), textToField);
     }
 
@@ -43,6 +47,7 @@ public class BasePage {
 
     protected String getText(By by){
         String textFetchedFromUi = DriverManager.getWebDriverFromThreadLocal().findElement(by).getText();
+        ExtentReportLogger.info("text fetched from Ui:"+ textFetchedFromUi);
         log.info("text fetched from Ui: {} ",textFetchedFromUi);
         return textFetchedFromUi;
     }
@@ -50,6 +55,7 @@ public class BasePage {
     protected void selectByDropDownValue(By by, String optionToSelect){
         Select select = new Select(DriverManager.getWebDriverFromThreadLocal().findElement(by));
         select.selectByValue(optionToSelect);
+        ExtentReportLogger.info("Drop down option selected:"+ optionToSelect);
         log.info("Drop down option selected:{}", optionToSelect);
     }
 
@@ -63,6 +69,7 @@ public class BasePage {
 
     protected void clickWebElement(WebElement webElement){
         webElement.click();
+        ExtentReportLogger.info("Element Clicked by WebElement:"+ webElement.toString());
         log.info("{} Element Clicked by WebElement", webElement.toString());
     }
 
@@ -73,6 +80,7 @@ public class BasePage {
      */
     protected void clickElementWithWait(By by, WaitStrategyEnums waitStrategyEnums){
         ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategyEnums).click();
+        ExtentReportLogger.info("Element Clicked:"+by.toString());
         log.info("{} Element Clicked", by.toString());
     }
 
@@ -83,6 +91,7 @@ public class BasePage {
      */
     protected void sendElementWithWait(By by, String textToField, WaitStrategyEnums waitStrategyEnums){
         ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategyEnums).sendKeys(textToField);
+        ExtentReportLogger.info(by.toString()+" Text Entered is "+ textToField);
         log.info("{} Text Entered is {}", by.toString(), textToField);
     }
 }
