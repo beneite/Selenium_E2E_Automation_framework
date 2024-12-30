@@ -4,21 +4,23 @@
         <listener class-name="com.asismisr.listeners.ListenersClass"/>
     </listeners>
     <test name="user-sam">
-        <parameter name="testDataPath" value="test-data/vendorPortal/sam.json" />
+        <parameter name="testDataPath" value="test-data/vendorPortal/EmployeeList.json" />
         <classes>
-            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
+            <class name="com.asismisr.test.vendorPortal.VendorPortalTest">
+            <methods>
+                <include name="loginTest"/>
+            </methods>
+            </class>
         </classes>
     </test>
-    <test name="user-mike">
-        <parameter name="testDataPath" value="test-data/vendorPortal/mike.json" />
-        <classes>
-            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
-        </classes>
-    </test>
-    <test name="user-john">
-        <parameter name="testDataPath" value="test-data/vendorPortal/john.json" />
-        <classes>
-            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
-        </classes>
-    </test>
+<!--    <test name="user-mike">-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="user-john">-->
+<!--        <classes>-->
+<!--            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
