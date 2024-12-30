@@ -7,7 +7,6 @@ import com.asismisr.test.BaseTest;
 import com.asismisr.test.vendorPortal.model.VendorPortalTestData;
 import com.asismisr.constants.Constants;
 import com.asismisr.utils.extentreport.ExtentReportLogger;
-import com.asismisr.utils.extentreport.ExtentReportUtils;
 import com.asismisr.utils.jsonparsing.JsonUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -32,18 +31,15 @@ public final class VendorPortalTest extends BaseTest {
 
     @Test
     public void loginTest(){
-        ExtentReportUtils.extentCreateTest("[Vendor-001] Login Test");
         this.loginPage = new LoginPage();
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
         loginPage.login(testData.username(), testData.password());
-        ExtentReportLogger.pass("[Vendor-001] Test passed");
     }
 
     @Test(dependsOnMethods = "loginTest")
     public void dashboardTest(){
-        ExtentReportUtils.extentCreateTest("[Vendor-002] Dashboard Test");
 
         // login test [Vendor-001] Login Test
         this.loginPage = new LoginPage();
@@ -65,12 +61,10 @@ public final class VendorPortalTest extends BaseTest {
         // order history search
         dashboardPage.searchOrderHistoryBy(testData.searchKeyword());
         Assert.assertEquals(dashboardPage.getSearchResultsCount(), testData.searchResultsCount());
-        ExtentReportLogger.pass("[Vendor-002] Test passed");
     }
 
     @Test(dependsOnMethods = "dashboardTest")
     public void logoutTest(){
-        ExtentReportUtils.extentCreateTest("[Vendor-003] Logout Test");
 
         // login test [Vendor-001] Login Test
         this.loginPage = new LoginPage();
@@ -95,7 +89,6 @@ public final class VendorPortalTest extends BaseTest {
 
         dashboardPage.logout();
         Assert.assertTrue(loginPage.isAt());
-        ExtentReportLogger.pass("[Vendor-003] Test passed");
     }
 
 }
