@@ -6,6 +6,8 @@ import com.asismisr.utils.extentreport.ExtentReportLogger;
 import com.asismisr.utils.extentreport.ExtentReportUtils;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestListener;
@@ -13,7 +15,7 @@ import org.testng.ITestResult;
 
 public class ListenersClass implements ITestListener, ISuiteListener {
 
-
+    private static Logger log =  LoggerFactory.getLogger(ListenersClass.class);
     @Override
     public void onStart(ISuite suite) {
 
@@ -32,6 +34,7 @@ public class ListenersClass implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestStart(ITestResult result) {
+        log.info("[onTestStart]");
         ExtentReportUtils.extentCreateTest(result.getMethod().getMethodName());
         ExtentReportLogger.info("Browser:"+((RemoteWebDriver)DriverManager.getWebDriverFromThreadLocal()).getCapabilities().getCapability(CapabilityType.BROWSER_NAME).toString());
         ExtentReportLogger.info("Browser version:"+((RemoteWebDriver) DriverManager.getWebDriverFromThreadLocal()).getCapabilities().getCapability(CapabilityType.BROWSER_VERSION).toString());

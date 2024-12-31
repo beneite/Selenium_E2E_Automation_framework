@@ -4,23 +4,9 @@
         <listener class-name="com.asismisr.listeners.ListenersClass"/>
     </listeners>
     <test name="user-sam">
-        <parameter name="testDataPath" value="test-data/vendorPortal/EmployeeList.json" />
         <classes>
-            <class name="com.asismisr.test.vendorPortal.VendorPortalTest">
-            <methods>
-                <include name="loginTest"/>
-            </methods>
-            </class>
+            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
         </classes>
     </test>
-<!--    <test name="user-mike">-->
-<!--        <classes>-->
-<!--            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="user-john">-->
-<!--        <classes>-->
-<!--            <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
 </suite>
+<!--The data provider has been set as 'parallel=true' due to which this will always run in parallel-->
