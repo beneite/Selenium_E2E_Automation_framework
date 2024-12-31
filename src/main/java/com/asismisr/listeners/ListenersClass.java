@@ -13,6 +13,8 @@ import org.testng.ISuiteListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.util.Arrays;
+
 public class ListenersClass implements ITestListener, ISuiteListener {
 
     private static Logger log =  LoggerFactory.getLogger(ListenersClass.class);
@@ -50,6 +52,7 @@ public class ListenersClass implements ITestListener, ISuiteListener {
     public void onTestFailure(ITestResult result) {
         ExtentReportLogger.fail("Test case:"+result.getMethod().getMethodName()+" is FAILED");
         ExtentReportLogger.info("Exception:"+result.getThrowable().toString());
+        ExtentReportLogger.info("Exception stack trace:"+ Arrays.toString(result.getThrowable().getStackTrace()));
     }
 
     @Override

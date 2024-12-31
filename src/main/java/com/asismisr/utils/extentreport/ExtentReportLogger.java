@@ -1,9 +1,7 @@
 package com.asismisr.utils.extentreport;
 
-import com.asismisr.drivermanagement.DriverManager;
+import com.asismisr.utils.ScreenshotUtils;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 
 public final class ExtentReportLogger {
 
@@ -17,18 +15,14 @@ public final class ExtentReportLogger {
     }
 
     public static void pass(String message){
-        ExtentReportManager.getExtentTestFromThreadLocal().pass(message, MediaEntityBuilder.createScreenCaptureFromBase64String(takeBase64Screenshot()).build());
+        ExtentReportManager.getExtentTestFromThreadLocal().pass(message, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.takeBase64Screenshot()).build());
     }
 
     public static void fail(String message){
-        ExtentReportManager.getExtentTestFromThreadLocal().fail(message, MediaEntityBuilder.createScreenCaptureFromBase64String(takeBase64Screenshot()).build());
+        ExtentReportManager.getExtentTestFromThreadLocal().fail(message, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.takeBase64Screenshot()).build());
     }
 
     public static void skip(String message){
         ExtentReportManager.getExtentTestFromThreadLocal().skip(message);
-    }
-
-    public static String takeBase64Screenshot(){
-        return ((TakesScreenshot)DriverManager.getWebDriverFromThreadLocal()).getScreenshotAs(OutputType.BASE64);
     }
 }
