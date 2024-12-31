@@ -62,7 +62,7 @@ public final class VendorPortalTest extends BaseTest {
         loginPage.login(employee.getUsername(), employee.getPassword());
     }
 
-    @Test(dependsOnMethods = "loginTest", dataProvider = "getEmployeeData")
+    @Test(dataProvider = "getEmployeeData")
     public void dashboardTest(Employee employee){
 
         // login test [Vendor-001] Login Test
@@ -87,7 +87,7 @@ public final class VendorPortalTest extends BaseTest {
         Assert.assertEquals(dashboardPage.getSearchResultsCount(), employee.getSearchResultsCount());
     }
 
-    @Test(dependsOnMethods = "dashboardTest", dataProvider = "getEmployeeData")
+    @Test(dataProvider = "getEmployeeData")
     public void logoutTest(Employee employee){
 
         // login test [Vendor-001] Login Test
