@@ -49,6 +49,7 @@ public class ListenersClass implements ITestListener, ISuiteListener {
     @Override
     public void onTestFailure(ITestResult result) {
         ExtentReportLogger.fail("Test case:"+result.getMethod().getMethodName()+" is FAILED");
+        ExtentReportLogger.info("Exception:"+result.getThrowable().toString());
     }
 
     @Override
