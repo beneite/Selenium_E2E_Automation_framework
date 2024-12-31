@@ -7,6 +7,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -17,6 +19,7 @@ public final class ExtentReportUtils {
         // making class as final to restrict class getting extended.
     }
 
+    private static final Logger log = LoggerFactory.getLogger(ExtentReportUtils.class);
     public static String TIMESTAMP = CommonUtilis.getCurrentDateTimeInSpecifiedFormat( "yyyy_MM_dd_HH_mm_ss");
     public static final String EXTENT_REPORT_PATH = System.getProperty("user.dir")+"/test-output/extent-Report/extentReport"+TIMESTAMP+".html";
     private static ExtentReports extentReports;
@@ -40,6 +43,7 @@ public final class ExtentReportUtils {
             extentReports.setSystemInfo("OS version", System.getProperty("os.version"));
             extentReports.setSystemInfo("Java version", System.getProperty("java.version"));
         }
+        log.info("*********************** Extent report initialization completed Successfully ***********************");
     }
 
     // Create a test instance

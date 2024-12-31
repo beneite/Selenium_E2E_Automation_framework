@@ -4,14 +4,20 @@ import com.asismisr.configs.Config;
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
 import com.asismisr.pages.vendorPortal.userLogin.LoginPage;
 import com.asismisr.test.BaseTest;
-import com.asismisr.test.vendorPortal.model.VendorPortalTestData;
+import com.asismisr.test.vendorPortal.model.Employee;
 import com.asismisr.constants.Constants;
 import com.asismisr.utils.extentreport.ExtentReportLogger;
-import com.asismisr.utils.jsonparsing.JsonUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public final class VendorPortalTest extends BaseTest {
 
@@ -19,73 +25,91 @@ public final class VendorPortalTest extends BaseTest {
         // making the test class final so that it should not be inherited
     }
 
+    private static Logger log =  LoggerFactory.getLogger(VendorPortalTest.class);
+
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
-    private VendorPortalTestData testData;
 
-    @BeforeTest
-    @Parameters("testDataPath")
-    public void setPageObjects(String testDataPath){
-        this.testData = JsonUtil.getTestData(testDataPath, VendorPortalTestData.class);
+    @DataProvider(name = "getEmployeeData", parallel = true)
+    public Object[][] getEmployeeData() throws IOException {
+        String filePath = System.getProperty("user.dir")+"/src/test/resources/test-data/vendorPortal/EmployeeList.json";
+
+        log.info("[Data provider] Reading from: " + filePath);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Read the JSON file into a List of Employee objects
+        List<Employee> employeeList = objectMapper.readValue(new File(filePath), new TypeReference<List<Employee>>() {});
+
+        // Create an Object[][] to hold Employee objects for the test
+        Object[][] employeeObject = new Object[employeeList.size()][1];
+
+        // Populate the 2D array with individual Employee objects
+        int i = 0;
+        for (Employee e : employeeList) {
+            employeeObject[i][0] = e; // Wrap each Employee object in an array (for Object[][])
+            i++;
+        }
+
+        return employeeObject;
     }
 
-    @Test
-    public void loginTest(){
+    @Test(dataProvider = "getEmployeeData")
+    public void loginTest(Employee employee){
         this.loginPage = new LoginPage();
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
-        loginPage.login(testData.username(), testData.password());
+        loginPage.login(employee.getUsername(), employee.getPassword());
     }
 
-    @Test(dependsOnMethods = "loginTest")
-    public void dashboardTest(){
+    @Test(dependsOnMethods = "loginTest", dataProvider = "getEmployeeData")
+    public void dashboardTest(Employee employee){
 
         // login test [Vendor-001] Login Test
         this.loginPage = new LoginPage();
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
-        loginPage.login(testData.username(), testData.password());
+        loginPage.login(employee.getUsername(), employee.getPassword());
 
         // dashboard test
         this.dashboardPage = new DashboardPage();
         Assert.assertTrue(dashboardPage.isAt());
 
         // finance metrics
-        Assert.assertEquals(dashboardPage.getMonthlyEarning(), testData.monthlyEarning());
-        Assert.assertEquals(dashboardPage.getAnnualEarning(), testData.annualEarning());
-        Assert.assertEquals(dashboardPage.getProfitMargin(), testData.profitMargin());
-        Assert.assertEquals(dashboardPage.getAvailableInventory(), testData.availableInventory());
+        Assert.assertEquals(dashboardPage.getMonthlyEarning(), employee.getMonthlyEarning());
+        Assert.assertEquals(dashboardPage.getAnnualEarning(), employee.getAnnualEarning());
+        Assert.assertEquals(dashboardPage.getProfitMargin(), employee.getProfitMargin());
+        Assert.assertEquals(dashboardPage.getAvailableInventory(), employee.getAvailableInventory());
 
         // order history search
-        dashboardPage.searchOrderHistoryBy(testData.searchKeyword());
-        Assert.assertEquals(dashboardPage.getSearchResultsCount(), testData.searchResultsCount());
+        dashboardPage.searchOrderHistoryBy(employee.getSearchKeyword());
+        Assert.assertEquals(dashboardPage.getSearchResultsCount(), employee.getSearchResultsCount());
     }
 
-    @Test(dependsOnMethods = "dashboardTest")
-    public void logoutTest(){
+    @Test(dependsOnMethods = "dashboardTest", dataProvider = "getEmployeeData")
+    public void logoutTest(Employee employee){
 
         // login test [Vendor-001] Login Test
         this.loginPage = new LoginPage();
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
-        loginPage.login(testData.username(), testData.password());
+        loginPage.login(employee.getUsername(), employee.getPassword());
 
         // dashboard test [Vendor-002] Dashboard Test
         this.dashboardPage = new DashboardPage();
         Assert.assertTrue(dashboardPage.isAt());
 
         // finance metrics
-        Assert.assertEquals(dashboardPage.getMonthlyEarning(), testData.monthlyEarning());
-        Assert.assertEquals(dashboardPage.getAnnualEarning(), testData.annualEarning());
-        Assert.assertEquals(dashboardPage.getProfitMargin(), testData.profitMargin());
-        Assert.assertEquals(dashboardPage.getAvailableInventory(), testData.availableInventory());
+        Assert.assertEquals(dashboardPage.getMonthlyEarning(), employee.getMonthlyEarning());
+        Assert.assertEquals(dashboardPage.getAnnualEarning(), employee.getAnnualEarning());
+        Assert.assertEquals(dashboardPage.getProfitMargin(), employee.getProfitMargin());
+        Assert.assertEquals(dashboardPage.getAvailableInventory(), employee.getAvailableInventory());
 
         // order history search
-        dashboardPage.searchOrderHistoryBy(testData.searchKeyword());
-        Assert.assertEquals(dashboardPage.getSearchResultsCount(), testData.searchResultsCount());
+        dashboardPage.searchOrderHistoryBy(employee.getSearchKeyword());
+        Assert.assertEquals(dashboardPage.getSearchResultsCount(), employee.getSearchResultsCount());
 
         dashboardPage.logout();
         Assert.assertTrue(loginPage.isAt());
