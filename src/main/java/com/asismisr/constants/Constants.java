@@ -16,6 +16,7 @@ public final class Constants {
     public static final String ERROR_MSG_BROWSER_NOT_SUPPORT = "Browser type not supported";
     public static final String ELASTIC_REALTIME_EXECUTION_REPORT = "elastic.realtime.execution.report";
     public static final String TRUE = "true";
+    public static final String HEADLESS_MODE_FLAG = "browser.headless";
 
     public static final Long LONG_TEN = 10L;
 }

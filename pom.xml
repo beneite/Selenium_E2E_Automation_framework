@@ -96,7 +96,7 @@
                 <configuration>
                     <systemPropertyVariables>
 <!--                        maven clean test -Dbrowser=chrome -Dselenium.grid.enabled=true  -->
-                        <browser>chrome</browser>
+<!--                        <browser>chrome</browser>-->
                         <selenium.grid.enabled>false</selenium.grid.enabled>
 <!--                        <selenium.grid.enabled>true</selenium.grid.enabled>-->
                     </systemPropertyVariables>
