@@ -1,0 +1,32 @@
+{
+  "chrome": {
+    "default": "119.0",
+    "versions": {
+      "119.0": {
+        "image": "selenoid/vnc_chrome:119.0",
+        "port": "4444",
+        "path": "/wd/hub"
+      },
+      "118.0": {
+        "image": "selenoid/vnc_chrome:118.0",
+        "port": "4444",
+        "path": "/wd/hub"
+      }
+    }
+  },
+  "firefox": {
+    "default": "117.0",
+    "versions": {
+      "117.0": {
+        "image": "selenoid/vnc_firefox:117.0",
+        "port": "4444",
+        "path": "/wd/hub"
+      },
+      "116.0": {
+        "image": "selenoid/vnc_firefox:116.0",
+        "port": "4444",
+        "path": "/wd/hub"
+      }
+    }
+  }
+}

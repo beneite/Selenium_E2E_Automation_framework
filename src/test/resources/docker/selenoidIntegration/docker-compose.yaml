@@ -1,0 +1,57 @@
+version: "3"
+services:
+  selenoid:
+    image: aerokube/selenoid:latest-release
+    container_name: selenoid
+    restart: always
+    ports:
+      - "4444:4444"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"  # Allows Selenoid to start browser containers
+      - "./config/:/etc/selenoid/"  # Config directory
+      - "./video/:/opt/selenoid/video/"  # Video storage directory
+    command:
+      - "-limit=10"  # Maximum concurrent sessions
+      - "-enable-video"  # Enable video recording
+      - "-video-output-dir=/opt/selenoid/video"
+      - "-log-output-dir=/opt/selenoid/logs"
+
+  selenoid-ui:
+    image: aerokube/selenoid-ui:latest-release
+    container_name: selenoid-ui
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - selenoid
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+
+  video-recorder:
+    image: selenoid/video-recorder:latest-release
+    container_name: selenoid-video-recorder
+    restart: always
+    volumes:
+      - "./video/:/opt/selenoid/video/"
+    environment:
+      - DISPLAY=:99  # Xvfb display number for video capture
+
+  vnc-chrome:
+    image: selenoid/vnc_chrome:84  # Specify required browser version
+    container_name: vnc-chrome
+    depends_on:
+      - selenoid
+
+  vnc-firefox:
+    image: selenoid/vnc_firefox:latest
+    container_name: vnc-firefox
+    depends_on:
+      - selenoid
+
+  android:
+    image: selenoid/android:11.0
+    container_name: selenoid-android
+    privileged: true  # Required for /dev/kvm access
+    environment:
+      - ENABLE_VNC=true  # Enable VNC to view execution
+    depends_on:
+      - selenoid

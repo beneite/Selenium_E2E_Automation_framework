@@ -2,6 +2,7 @@
 <suite name="vendor-portal">
     <listeners>
         <listener class-name="com.asismisr.listeners.ListenersClass"/>
+        <listener class-name="com.asismisr.listeners.TestAnnotationTransformer"/>
     </listeners>
     <test name="user-sam">
         <classes>
