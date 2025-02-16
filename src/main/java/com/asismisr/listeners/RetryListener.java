@@ -5,8 +5,8 @@ import org.testng.ITestResult;
 
 public class RetryListener implements IRetryAnalyzer {
 
-    private int currentCount = 0;
-    private int maxRetryCount = 2;
+    private int count = 0;
+    private static final int MAX_RETRY_COUNT = 1; // set the maximum number of retries here
 
     /**
      * this method will enable test case to re-run in case the test case fails.
@@ -15,9 +15,13 @@ public class RetryListener implements IRetryAnalyzer {
      */
     @Override
     public boolean retry(ITestResult iTestResult) {
-
-        boolean value = currentCount < maxRetryCount;
-        currentCount++;
-        return value;
+        if (count < MAX_RETRY_COUNT) {
+            // if the test has failed, retry it
+            if (iTestResult.getStatus() == ITestResult.FAILURE) {
+                count++;
+                return true;
+            }
+        }
+        return false;
     }
 }

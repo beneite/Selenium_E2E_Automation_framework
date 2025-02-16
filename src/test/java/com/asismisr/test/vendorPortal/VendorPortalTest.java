@@ -112,6 +112,7 @@ public final class VendorPortalTest extends BaseTest {
         Assert.assertEquals(dashboardPage.getSearchResultsCount(), employee.getSearchResultsCount());
 
         dashboardPage.logout();
+        //TODO: need to add assertJ
         Assert.assertTrue(loginPage.isAt());
     }
 

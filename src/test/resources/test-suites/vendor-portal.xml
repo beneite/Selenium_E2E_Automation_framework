@@ -4,7 +4,7 @@
         <listener class-name="com.asismisr.listeners.ListenersClass"/>
         <listener class-name="com.asismisr.listeners.TestAnnotationTransformer"/>
     </listeners>
-    <test name="user-sam">
+    <test name="VendorPortal Test">
         <classes>
             <class name="com.asismisr.test.vendorPortal.VendorPortalTest"/>
         </classes>

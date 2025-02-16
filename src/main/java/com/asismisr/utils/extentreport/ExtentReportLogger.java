@@ -3,6 +3,7 @@ package com.asismisr.utils.extentreport;
 import com.asismisr.utils.ScreenshotUtils;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
+//TODO: need to add a new reporting system and replace extent report.
 public final class ExtentReportLogger {
 
     private ExtentReportLogger(){
