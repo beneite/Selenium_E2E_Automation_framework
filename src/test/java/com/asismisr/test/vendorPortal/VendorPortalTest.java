@@ -1,6 +1,8 @@
 package com.asismisr.test.vendorPortal;
 
+import com.asismisr.annotations.TestCategoryAnnotation;
 import com.asismisr.configs.Config;
+import com.asismisr.enums.TestGroupEnum;
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
 import com.asismisr.pages.vendorPortal.userLogin.LoginPage;
 import com.asismisr.test.BaseTest;
@@ -53,6 +55,7 @@ public final class VendorPortalTest extends BaseTest {
         return employeeObject;
     }
 
+    @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.SMOKE})
     @Test(dataProvider = "getEmployeeData")
     public void loginTest(Employee employee){
         this.loginPage = new LoginPage();
@@ -62,6 +65,7 @@ public final class VendorPortalTest extends BaseTest {
         loginPage.login(employee.getUsername(), employee.getPassword());
     }
 
+    @TestCategoryAnnotation(testAuthors = "Mohit", testGroups = {TestGroupEnum.SMOKE, TestGroupEnum.REGRESSION})
     @Test(dataProvider = "getEmployeeData")
     public void dashboardTest(Employee employee){
 
@@ -87,6 +91,7 @@ public final class VendorPortalTest extends BaseTest {
         Assert.assertEquals(dashboardPage.getSearchResultsCount(), employee.getSearchResultsCount());
     }
 
+    @TestCategoryAnnotation(testAuthors = "Kapil", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.E2E})
     @Test(dataProvider = "getEmployeeData")
     public void logoutTest(Employee employee){
 

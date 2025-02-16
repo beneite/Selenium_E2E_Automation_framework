@@ -1,7 +1,9 @@
 package com.asismisr.listeners;
 
+import com.asismisr.annotations.TestCategoryAnnotation;
 import com.asismisr.configs.Config;
 import com.asismisr.drivermanagement.DriverManager;
+import com.asismisr.enums.TestGroupEnum;
 import com.asismisr.utils.extentreport.ExtentReportLogger;
 import com.asismisr.utils.extentreport.ExtentReportUtils;
 import org.openqa.selenium.remote.CapabilityType;
@@ -37,10 +39,17 @@ public class ListenersClass implements ITestListener, ISuiteListener {
     @Override
     public void onTestStart(ITestResult result) {
         log.info("[onTestStart]");
+
         ExtentReportUtils.extentCreateTest(result.getMethod().getMethodName());
         ExtentReportLogger.info("Browser:"+((RemoteWebDriver)DriverManager.getWebDriverFromThreadLocal()).getCapabilities().getCapability(CapabilityType.BROWSER_NAME).toString());
         ExtentReportLogger.info("Browser version:"+((RemoteWebDriver) DriverManager.getWebDriverFromThreadLocal()).getCapabilities().getCapability(CapabilityType.BROWSER_VERSION).toString());
         ExtentReportLogger.info("Test started:"+result.getMethod().getMethodName());
+
+        String author = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TestCategoryAnnotation.class).testAuthors();
+        ExtentReportUtils.addTestMethodAuthors(author);    // assigning the author for a test
+
+        TestGroupEnum[] testGroup = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TestCategoryAnnotation.class).testGroups();
+        ExtentReportUtils.addTestMethodGroups(testGroup);    // assigning the author for a test
     }
 
     @Override
