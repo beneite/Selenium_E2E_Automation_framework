@@ -3,6 +3,7 @@ package com.asismisr.utils.extentreport;
 import com.asismisr.codeUtils.CommonUtilis;
 import com.asismisr.configs.Config;
 import com.asismisr.constants.Constants;
+import com.asismisr.enums.TestGroupEnum;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -68,6 +69,16 @@ public final class ExtentReportUtils {
         if(!Objects.isNull(extentReports)){
             extentReports.flush();
             ExtentReportManager.unloadExtentTestFromThreadLocal();
+        }
+    }
+
+    public static void addTestMethodAuthors(String author){
+        ExtentReportManager.getExtentTestFromThreadLocal().assignAuthor(author);
+    }
+
+    public static void addTestMethodGroups(TestGroupEnum[] groups){
+        for(TestGroupEnum group : groups){
+            ExtentReportManager.getExtentTestFromThreadLocal().assignCategory(group.toString());
         }
     }
 

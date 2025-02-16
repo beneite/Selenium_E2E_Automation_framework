@@ -1,6 +1,8 @@
 package com.asismisr.test.flightRegistration;
 
+import com.asismisr.annotations.TestCategoryAnnotation;
 import com.asismisr.configs.Config;
+import com.asismisr.enums.TestGroupEnum;
 import com.asismisr.pages.flightRegistration.flightConfirmation.FlightConfirmationPage;
 import com.asismisr.pages.flightRegistration.flightSearch.FlightSearchPage;
 import com.asismisr.pages.flightRegistration.flightSelection.FlightSelectionPage;
@@ -36,6 +38,7 @@ public final class FlightRegistrationTest extends BaseTest {
         this.testData = JsonUtil.getTestData(testDataPath, FlightReservationTestData.class);
     }
 
+    @TestCategoryAnnotation(testAuthors = "Kapil", testGroups = {TestGroupEnum.SMOKE, TestGroupEnum.REGRESSION, TestGroupEnum.SANITY})
     @Test
     public void userRegistrationTest(){
 //        //ExtentReportUtils.getTest().info("Verify userRegistrationTest");
@@ -51,6 +54,7 @@ public final class FlightRegistrationTest extends BaseTest {
         //ExtentReportUtils.getTest().pass("User successfully registered");
     }
 
+    @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.REGRESSION})
     @Test(dependsOnMethods = "userRegistrationTest")
     public void registrationConfirmationTest(){
         userRegistrationTest();
@@ -62,6 +66,7 @@ public final class FlightRegistrationTest extends BaseTest {
         //ExtentReportUtils.getTest().pass("User registrationConfirmationTest pass");
     }
 
+    @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.REGRESSION})
     @Test(dependsOnMethods = "registrationConfirmationTest")
     public void flightsSearchTest(){
         userRegistrationTest();
@@ -74,6 +79,7 @@ public final class FlightRegistrationTest extends BaseTest {
         //ExtentReportUtils.getTest().pass("User flightsSearchTest pass");
     }
 
+    @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.REGRESSION})
     @Test(dependsOnMethods = "flightsSearchTest")
     public void flightsSelectionTest(){
         userRegistrationTest();
@@ -87,6 +93,7 @@ public final class FlightRegistrationTest extends BaseTest {
         //ExtentReportUtils.getTest().pass("User flightsSelectionTest pass");
     }
 
+    @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.E2E})
     @Test(dependsOnMethods = "flightsSelectionTest")
     public void flightReservationConfirmationTest(){
         userRegistrationTest();

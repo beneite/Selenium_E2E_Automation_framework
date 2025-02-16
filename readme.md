@@ -1,6 +1,7 @@
 Assert J
 remove page factory
 base page should have common dom element interaction elements (make them protected), add explicit wait
+new extent report
 
 # Application URLs
 
