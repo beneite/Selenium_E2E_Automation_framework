@@ -61,24 +61,58 @@ public final class Driver {
 
     private static WebDriver getLocalWebdriver() {
         String configBrowserType = Config.getTestProperty(Constants.BROWSER);
-        switch (BrowserEnums.valueOf(configBrowserType.toUpperCase())) {
-            case CHROME -> {
-                WebDriverManager.chromedriver().setup();
-                return new ChromeDriver();
-            }
-            case FIREFOX -> {
-                WebDriverManager.firefoxdriver().setup();
-                return new FirefoxDriver();
-            }
-            case EDGE -> {
-                WebDriverManager.edgedriver().setup();
-                return new EdgeDriver();
-            }
+        boolean configHeadlessModeFlag = Boolean.parseBoolean(Config.getTestProperty(Constants.HEADLESS_MODE_FLAG));
+        WebDriver driver;
+
+        driver = switch (BrowserEnums.valueOf(configBrowserType.toUpperCase())) {
+            case CHROME -> createChromeDriver(configHeadlessModeFlag);
+            case FIREFOX -> createFirefoxDriver(configHeadlessModeFlag);
+            case EDGE -> createEdgeDriver(configHeadlessModeFlag);
+
             default -> throw new IllegalArgumentException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
-        }
+        };
+
+        return driver;
     }
 
     public static void quitDriver(){
         DriverManager.getWebDriverFromThreadLocal().quit();
+    }
+
+    // create a Chrome driver and set options
+    private static WebDriver createChromeDriver(boolean isHeadless) {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        setHeadlessOptions(options, isHeadless);
+        return new ChromeDriver(options);
+    }
+
+    // create a Firefox driver and set options
+    private static WebDriver createFirefoxDriver(boolean isHeadless) {
+        WebDriverManager.firefoxdriver().setup();
+        FirefoxOptions options = new FirefoxOptions();
+        setHeadlessOptions(options, isHeadless);
+        return new FirefoxDriver(options);
+    }
+
+    // create a Edge driver and set options
+    private static WebDriver createEdgeDriver(boolean isHeadless) {
+        WebDriverManager.edgedriver().setup();
+        EdgeOptions options = new EdgeOptions();
+        setHeadlessOptions(options, isHeadless);
+        return new EdgeDriver(options);
+    }
+
+    private static void setHeadlessOptions(org.openqa.selenium.MutableCapabilities options, boolean isHeadless){
+        if(isHeadless){
+            // Use W3C-compliant way to enable headless mode
+            if (options instanceof ChromeOptions chromeOptions) {
+                chromeOptions.addArguments("--headless=new", "--disable-gpu", "--window-size=1920,1080");
+            } else if (options instanceof EdgeOptions edgeOptions) {
+                edgeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
+            } else if (options instanceof FirefoxOptions firefoxOptions) {
+                firefoxOptions.addArguments("--headless");
+            }
+        }
     }
 }
