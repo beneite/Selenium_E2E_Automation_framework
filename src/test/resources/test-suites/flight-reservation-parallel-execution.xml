@@ -2,6 +2,7 @@
 <suite name="flight-reservation" parallel="tests" thread-count="4">
     <listeners>
         <listener class-name="com.asismisr.listeners.ListenersClass"/>
+        <listener class-name="com.asismisr.listeners.TestAnnotationTransformer"/>
     </listeners>
     <test name="passengers-count-1">
         <parameter name="testDataPath" value="test-data/flightRegistration/passenger-1.json" />
