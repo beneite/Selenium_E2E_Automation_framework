@@ -67,6 +67,7 @@ public final class ExtentReportUtils {
     public static void tearDown() {
         if(!Objects.isNull(extentReports)){
             extentReports.flush();
+            ExtentReportManager.unloadExtentTestFromThreadLocal();
         }
     }
 

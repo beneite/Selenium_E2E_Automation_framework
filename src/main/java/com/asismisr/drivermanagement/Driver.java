@@ -38,6 +38,7 @@ public final class Driver {
         DriverManager.setWebDriverThreadLocal(driver);
     }
 
+    //TODO: need to add support for headless for remote web driver/selenium hub execution too
     private static WebDriver getRemoteWebDriver() {
         String configBrowserType = Config.getTestProperty(Constants.BROWSER);
         Capabilities capabilities ;
@@ -103,14 +104,14 @@ public final class Driver {
         return new EdgeDriver(options);
     }
 
-    private static void setHeadlessOptions(org.openqa.selenium.MutableCapabilities options, boolean isHeadless){
+    private static void setHeadlessOptions(org.openqa.selenium.MutableCapabilities capabilities, boolean isHeadless){
         if(isHeadless){
             // Use W3C-compliant way to enable headless mode
-            if (options instanceof ChromeOptions chromeOptions) {
+            if (capabilities instanceof ChromeOptions chromeOptions) {
                 chromeOptions.addArguments("--headless=new", "--disable-gpu", "--window-size=1920,1080");
-            } else if (options instanceof EdgeOptions edgeOptions) {
+            } else if (capabilities instanceof EdgeOptions edgeOptions) {
                 edgeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
-            } else if (options instanceof FirefoxOptions firefoxOptions) {
+            } else if (capabilities instanceof FirefoxOptions firefoxOptions) {
                 firefoxOptions.addArguments("--headless");
             }
         }
