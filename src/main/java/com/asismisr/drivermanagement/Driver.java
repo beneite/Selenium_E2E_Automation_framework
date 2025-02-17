@@ -3,6 +3,8 @@ package com.asismisr.drivermanagement;
 import com.asismisr.configs.Config;
 import com.asismisr.constants.Constants;
 import com.asismisr.enums.BrowserEnums;
+import com.asismisr.exceptions.BrowserNotFoundException;
+import com.asismisr.exceptions.FrameworkExceptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +48,7 @@ public final class Driver {
             case CHROME -> capabilities = new ChromeOptions();
             case FIREFOX -> capabilities = new FirefoxOptions();
             case EDGE -> capabilities = new EdgeOptions();
-            default -> throw new IllegalArgumentException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
+            default -> throw new BrowserNotFoundException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
         }
         String seleniumHubUrlFormat = Config.getTestProperty(Constants.SELENIUM_GRID_URL_FORMAT);
         String seleniumGridHubHost = Config.getTestProperty(Constants.SELENIUM_GRID_HUB_HOST);
@@ -55,7 +57,7 @@ public final class Driver {
         try {
             return new RemoteWebDriver(new URL(url), capabilities);
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new FrameworkExceptions("Unable to generate selenium hub url:"+e);
         }
     }
 
@@ -70,7 +72,7 @@ public final class Driver {
             case FIREFOX -> createFirefoxDriver(configHeadlessModeFlag);
             case EDGE -> createEdgeDriver(configHeadlessModeFlag);
 
-            default -> throw new IllegalArgumentException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
+            default -> throw new BrowserNotFoundException(Constants.ERROR_MSG_BROWSER_NOT_SUPPORT);
         };
 
         return driver;
