@@ -1,9 +1,11 @@
 package com.asismisr.configs;
 
+import com.asismisr.exceptions.ResourceNotFoundExceptions;
 import com.asismisr.utils.resourceloader.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
@@ -50,7 +52,7 @@ public final class Config {
     public static String getTestProperty(String key){
         String value = properties.getProperty(key);
         if(Objects.isNull(value))
-            log.warn("Value for {} not found in default.properties file.", key);
+            throw new ResourceNotFoundExceptions("Value for {} not found in default.properties file for"+ key);
         return value;
     }
 
@@ -60,8 +62,8 @@ public final class Config {
 
         try(InputStream inputStream = ResourceLoader.getResource(CONFIG_FILE_LOCATION)){
             properties.load(inputStream);
-        }catch (Exception e){
-            log.error("Failed to load the config file:"+ CONFIG_FILE_LOCATION+ e);
+        } catch (IOException e) {
+            throw new ResourceNotFoundExceptions("Failed to load the config file:"+ CONFIG_FILE_LOCATION+ e);
         }
         return properties;
     }
