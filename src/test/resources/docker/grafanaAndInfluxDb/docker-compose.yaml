@@ -1,0 +1,24 @@
+services:
+  influxdb_service:
+    image: influxdb:2.7
+    container_name: influxdb_container
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influxHostVolume:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin
+      - DOCKER_INFLUXDB_INIT_ORG=qa-org
+      - DOCKER_INFLUXDB_INIT_BUCKET=qa-tests
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mysecrettoken
+
+  influx_init_service:
+    image: influxdb:2.7
+    container_name: influx_init_container
+    entrypoint: ["/bin/sh", "-c", "/init/init-influx.sh"]
+    depends_on:
+      - influxdb_service
+    volumes:
+      - ./init_influxDb/init_influx.sh:/init/init-influx.sh
