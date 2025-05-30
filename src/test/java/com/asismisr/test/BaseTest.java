@@ -5,6 +5,7 @@ import com.asismisr.constants.Constants;
 import com.asismisr.drivermanagement.Driver;
 import com.asismisr.drivermanagement.DriverManager;
 import com.asismisr.utils.ekl.PublishResults;
+import com.asismisr.utils.influxDb.InfluxUtils;
 import com.google.common.util.concurrent.Uninterruptibles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +47,11 @@ public class BaseTest {
             DriverManager.unloadWebDriverThreadLocal();
         }
 
-        // this will be used to publish results.
-        PublishResults.publishResults(iTestResult);
+        // this will be used to publish results to Elastic Search DB.
+        PublishResults.publishResultsToElasticSearch(iTestResult);
+
+        // this will be used to publish results to influx DB.
+        InfluxUtils.sendResultsToInfluxDb(iTestResult);
     }
 
     @AfterSuite

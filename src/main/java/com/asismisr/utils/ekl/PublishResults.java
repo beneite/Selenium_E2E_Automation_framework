@@ -3,7 +3,6 @@ package com.asismisr.utils.ekl;
 import com.asismisr.configs.Config;
 import com.asismisr.constants.Constants;
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
-import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
@@ -31,7 +30,7 @@ public class PublishResults {
         return map;
     }
 
-    public static void publishResults(ITestResult iTestResult){
+    public static void publishResultsToElasticSearch(ITestResult iTestResult){
         if(Config.getTestProperty(Constants.ELASTIC_REALTIME_EXECUTION_REPORT).equalsIgnoreCase(Constants.TRUE)){
             HashMap<String, String> testPayload = getTestResultsDataToPublish(iTestResult);
             String addResultsResponse = given().header("content-type","application/json")
