@@ -74,7 +74,11 @@
             <version>${lombok.version}</version> <!-- Replace with the latest version -->
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.influxdb</groupId>
+            <artifactId>influxdb-client-java</artifactId>
+            <version>6.11.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>selenium-code-compiled</finalName>

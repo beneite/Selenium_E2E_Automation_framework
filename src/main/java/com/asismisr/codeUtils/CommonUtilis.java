@@ -1,9 +1,11 @@
 package com.asismisr.codeUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
@@ -109,6 +111,17 @@ public class CommonUtilis {
             // Handle invalid format strings
             return "Invalid date-time format: " + e.getMessage();
         }
+    }
+
+    /**
+     * Get current time as Instant converted from local system time zone.
+     *
+     * @return Instant representing current local time in UTC
+     */
+    public static Instant getCurrentLocalTimeInstant() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        ZoneId systemZone = ZoneId.systemDefault();
+        return localDateTime.atZone(systemZone).toInstant();
     }
 
 }

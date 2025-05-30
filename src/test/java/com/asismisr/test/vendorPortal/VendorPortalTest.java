@@ -23,24 +23,25 @@ import java.util.List;
 
 public final class VendorPortalTest extends BaseTest {
 
-    private VendorPortalTest(){
+    private VendorPortalTest() {
         // making the test class final so that it should not be inherited
     }
 
-    private static Logger log =  LoggerFactory.getLogger(VendorPortalTest.class);
+    private static Logger log = LoggerFactory.getLogger(VendorPortalTest.class);
 
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
 
     @DataProvider(name = "getEmployeeData", parallel = true)
     public Object[][] getEmployeeData() throws IOException {
-        String filePath = System.getProperty("user.dir")+"/src/test/resources/test-data/vendorPortal/EmployeeList.json";
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/test-data/vendorPortal/EmployeeList.json";
 
         log.info("[Data provider] Reading from: " + filePath);
         ObjectMapper objectMapper = new ObjectMapper();
 
         // Read the JSON file into a List of Employee objects
-        List<Employee> employeeList = objectMapper.readValue(new File(filePath), new TypeReference<List<Employee>>() {});
+        List<Employee> employeeList = objectMapper.readValue(new File(filePath), new TypeReference<List<Employee>>() {
+        });
 
         // Create an Object[][] to hold Employee objects for the test
         Object[][] employeeObject = new Object[employeeList.size()][1];
@@ -56,8 +57,9 @@ public final class VendorPortalTest extends BaseTest {
     }
 
     @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.SMOKE})
-    @Test(dataProvider = "getEmployeeData")
-    public void loginTest(Employee employee){
+    @Test(dataProvider = "getEmployeeData",
+            description = "loginTest-Test to verify the user able to login")
+    public void loginTest(Employee employee) {
         this.loginPage = new LoginPage();
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
@@ -66,8 +68,9 @@ public final class VendorPortalTest extends BaseTest {
     }
 
     @TestCategoryAnnotation(testAuthors = "Mohit", testGroups = {TestGroupEnum.SMOKE, TestGroupEnum.REGRESSION})
-    @Test(dataProvider = "getEmployeeData")
-    public void dashboardTest(Employee employee){
+    @Test(dataProvider = "getEmployeeData",
+            description = "dashboardTest-Test to verify the user dashboard")
+    public void dashboardTest(Employee employee) {
 
         // login test [Vendor-001] Login Test
         this.loginPage = new LoginPage();
@@ -92,7 +95,8 @@ public final class VendorPortalTest extends BaseTest {
     }
 
     @TestCategoryAnnotation(testAuthors = "Kapil", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.E2E})
-    @Test(dataProvider = "getEmployeeData")
+    @Test(dataProvider = "getEmployeeData",
+            description = "logoutTest-Test to verify the user able to logout")
     public void logoutTest(Employee employee){
 
         // login test [Vendor-001] Login Test
