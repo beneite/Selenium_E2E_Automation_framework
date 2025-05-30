@@ -9,7 +9,7 @@ services:
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
       - DOCKER_INFLUXDB_INIT_ORG=qa-org
       - DOCKER_INFLUXDB_INIT_BUCKET=qa-tests
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mysecrettoken
@@ -22,3 +22,15 @@ services:
       - influxdb_service
     volumes:
       - ./init_influxDb/init_influx.sh:/init/init-influx.sh
+
+  grafana_service:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - ./grafana_data:/var/lib/grafana
