@@ -22,7 +22,7 @@ public final class ExtentReportUtils {
 
     private static final Logger log = LoggerFactory.getLogger(ExtentReportUtils.class);
     public static String TIMESTAMP = CommonUtilis.getCurrentDateTimeInSpecifiedFormat( "yyyy_MM_dd_HH_mm_ss");
-    public static final String EXTENT_REPORT_PATH = System.getProperty("user.dir")+"/test-output/extent-Report/extentReport"+TIMESTAMP+".html";
+    public static final String EXTENT_REPORT_PATH = "target/test-output/extent-Report/extentReport"+TIMESTAMP+".html";
     private static ExtentReports extentReports;
     public static ExtentSparkReporter extentSparkReporter;
 
