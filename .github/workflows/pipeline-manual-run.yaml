@@ -1,0 +1,27 @@
+name: pipeline-manual-run to run test cases manually
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out the repo
+        run: actions/checkout@v4
+
+      - name: Build the project (compile and install)
+        run: mvn clean test -DskipTests
+
+      - name: Running the test cases
+        run: mvn clean test -Dsuite=vendor-portal.xml
+
+      - name: listing the files in target folder
+        run: find .
+
+      - name: Publishing the Test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-upload-extentReport
+          path: /test-output/extent-Report
