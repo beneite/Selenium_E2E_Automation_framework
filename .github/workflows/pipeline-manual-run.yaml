@@ -10,13 +10,16 @@ jobs:
       - name: Checking out the repo
         uses: actions/checkout@v4
 
+      - name: listing the files before running
+        run: find .
+
       - name: Build the project (compile and install)
-        run: mvn clean test -DskipTests
+        run: mvn clean install -DskipTests
 
       - name: Running the test cases
         run: mvn clean test -Dsuite=vendor-portal.xml
 
-      - name: listing the files in target folder
+      - name: listing the files after test run
         run: find .
 
       - name: Publishing the Test artifacts
@@ -24,4 +27,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports-upload-extentReport
-          path: /test-output/extent-Report
+          path: target/test-output/extent-Report
+          retention-days: 100                     # for 100 days the report will persist after that it will be deleted
