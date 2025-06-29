@@ -32,3 +32,13 @@ jobs:
           name: test-reports-upload-extentReport
           path: target/test-output/extent-Report
           retention-days: 100                                 # for 100 days the report will persist after that it will be deleted
+
+  download-test-report-job:
+    needs: run-test-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Test Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports-upload-extentReport
+          path: test-execution-reports/
