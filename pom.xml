@@ -105,8 +105,8 @@
 <!--                        <selenium.grid.enabled>true</selenium.grid.enabled>-->
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <file>src/test/resources/test-suites/flight-reservation.xml</file>
-                        <file>src/test/resources/test-suites/vendor-portal.xml</file>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <suiteXmlFile>target/test-classes/test-suites/${suite}</suiteXmlFile>
                     </suiteXmlFiles>
                     <threadCount>1</threadCount>
                     <reportsDirectory>target/test-output/testng-report</reportsDirectory>
