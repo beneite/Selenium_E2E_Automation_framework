@@ -10,6 +10,13 @@ jobs:
       - name: Checking out the repo
         uses: actions/checkout@v4
 
+      - name: Cache Maven dependencies              # adding this to speed up the execution, any changes in pom.xml file will result in cache miss
+        id: maven-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+
       - name: listing the files before running
         run: find .
 
@@ -31,9 +38,9 @@ jobs:
         with:
           name: test-reports-upload-extentReport
           path: target/test-output/extent-Report
-          retention-days: 100                                 # for 100 days the report will persist after that it will be deleted
+          retention-days: 30                                 # for 30 days the report will persist after that it will be deleted, default is 90 days
 
-  download-test-report-job:
+  download-test-report-job:                                   # this will download the artifact
     needs: run-test-job
     runs-on: ubuntu-latest
     steps:
