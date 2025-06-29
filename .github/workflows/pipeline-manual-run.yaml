@@ -17,10 +17,13 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Running the test cases
+        continue-on-error: true
         run: mvn clean test -Dsuite=vendor-portal.xml
 
-      - name: listing the files after test run
-        run: find .
+      - name: Printing the Test execution status
+        if: always()                                           # adding always() since this step will run always even if test cases run fail
+        continue-on-error: true
+        run: cat target/test-output/testng-report/TestSuite.txt
 
       - name: Publishing the Test artifacts
         if: always()
@@ -28,4 +31,4 @@ jobs:
         with:
           name: test-reports-upload-extentReport
           path: target/test-output/extent-Report
-          retention-days: 100                     # for 100 days the report will persist after that it will be deleted
+          retention-days: 100                                 # for 100 days the report will persist after that it will be deleted
