@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out the repo
-        run: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Build the project (compile and install)
         run: mvn clean test -DskipTests
