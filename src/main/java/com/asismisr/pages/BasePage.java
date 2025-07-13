@@ -9,6 +9,7 @@ import com.asismisr.factory.ExplicitWaitImplementation;
 import com.asismisr.utils.extentreport.ExtentReportLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -32,6 +33,15 @@ public class BasePage {
         DriverManager.getWebDriverFromThreadLocal().findElement(by).click();
         ExtentReportLogger.info("Element Clicked:"+ by.toString());
         log.info("{} Element Clicked", by.toString());
+    }
+
+    protected void scrollToElement(By by)
+    {
+        Actions actions=new Actions(DriverManager.getWebDriverFromThreadLocal());
+        WebElement element=DriverManager.getWebDriverFromThreadLocal().findElement(by);
+        actions.scrollToElement(element).perform();
+        ExtentReportLogger.info("Element Scrolled:"+ by.toString());
+        log.info("{} Element Scrolled", by.toString());
     }
 
     protected void sendElement(By by, String textToField){
