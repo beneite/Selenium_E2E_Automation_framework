@@ -9,6 +9,7 @@ import com.asismisr.factory.ExplicitWaitImplementation;
 import com.asismisr.utils.extentreport.ExtentReportLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -93,5 +94,14 @@ public class BasePage {
         ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategyEnums).sendKeys(textToField);
         ExtentReportLogger.info(by.toString()+" Text Entered is "+ textToField);
         log.info("{} Text Entered is {}", by.toString(), textToField);
+    }
+
+    protected void scrollToElement(By by)
+    {
+        Actions actions=new Actions(DriverManager.getWebDriverFromThreadLocal());
+        WebElement element=DriverManager.getWebDriverFromThreadLocal().findElement(by);
+        actions.scrollToElement(element).perform();
+        ExtentReportLogger.info("Element Scrolled:"+ by.toString());
+        log.info("{} Element Scrolled", by.toString());
     }
 }
