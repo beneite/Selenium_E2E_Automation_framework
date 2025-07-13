@@ -25,6 +25,7 @@ public final class FlightSelectionPage extends BasePage {
     }
 
     public void confirmFlights(){
+        scrollToElement(CONFIRM_FLIGHTS_BUTTON);
         clickElement(CONFIRM_FLIGHTS_BUTTON);
     }
 }
