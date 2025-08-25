@@ -26,4 +26,10 @@ public final class ExtentReportLogger {
     public static void skip(String message){
         ExtentReportManager.getExtentTestFromThreadLocal().skip(message);
     }
+
+    public static void info(String message, boolean screenshotFlag){
+        if(screenshotFlag){
+            ExtentReportManager.getExtentTestFromThreadLocal().info(message, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.takeBase64Screenshot()).build());
+        }
+    }
 }

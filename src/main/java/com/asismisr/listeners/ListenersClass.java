@@ -68,4 +68,8 @@ public class ListenersClass implements ITestListener, ISuiteListener {
     public void onTestSkipped(ITestResult result) {
         ExtentReportLogger.skip("Test case:"+result.getMethod().getMethodName()+" is SKIPPED");
     }
+
+    public static void attachScreenshotWithMessage(String message){
+        ExtentReportLogger.info(message, true);
+    }
 }
