@@ -20,4 +20,10 @@ public final class Constants {
     public static final String INFLUX_REALTIME_EXECUTION_REPORT = "influxDb.realtime.execution.report";
 
     public static final Long LONG_TEN = 10L;
+
+    public static final String LOGIN_TEXT = "Login";
+    public static final boolean LOGIN_BUTTON=true;
+    public static final String PRODUCT_PAGE_URL="https://.www.saucedemo.com/inventory.html";
+
+    public static final String SAUSEDEMO_URL="sauseDemo.url";
 }
