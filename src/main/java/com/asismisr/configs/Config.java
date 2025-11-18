@@ -28,7 +28,6 @@ public final class Config {
 
         // load the default properties
         properties = loadProperties();
-
         // overriding the default properties
         for(String key : properties.stringPropertyNames()){
             if(System.getProperties().containsKey(key)){

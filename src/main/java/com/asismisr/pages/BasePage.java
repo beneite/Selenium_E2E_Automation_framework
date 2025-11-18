@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -35,10 +36,31 @@ public class BasePage {
         log.info("{} Element Clicked", by.toString());
     }
 
-    protected void clickElement(String xpathString){
-        DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(xpathString)).click();
-        ExtentReportLogger.info("Element Clicked:"+ xpathString);
-        log.info("{} Element Clicked", xpathString);
+    protected String getElementText(String element){
+        ExtentReportLogger.info("Element text:"+ element.toString());
+        log.info("{} Element text", element.toString());
+        return DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(element)).getText();
+    }
+
+    protected WebElement findElementsXpath(String input)
+    {
+        ExtentReportLogger.info("Element found:"+input);
+        log.info("Element found: {}",input);
+        return DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(input));
+    }
+
+    protected void clickOnElement(String element)
+    {
+        DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(element)).click();
+        ExtentReportLogger.info("Element clicked:"+element);
+        log.info("Element clicked: {}",element);
+    }
+
+    protected boolean isElementDisplayed(String element)
+    {
+        ExtentReportLogger.info("Element located:"+element);
+        log.info("Element located: {}",element);
+        return DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(element)).isDisplayed();
     }
 
     protected void scrollToElement(By by)
@@ -67,21 +89,7 @@ public class BasePage {
                 .until(webElement -> webElement.findElement(by).isDisplayed());
     }
 
-    protected String getElementAttribute(String xpathString,String attributeKey)
-    {
-        String elementText=DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(xpathString)).getDomAttribute(attributeKey);
-        ExtentReportLogger.info(xpathString+" Text returned is "+ elementText);
-        log.info("{} Text returned is {}", xpathString, elementText);
-        return elementText;
-    }
 
-    protected boolean elementVisiblity(String xpathString)
-    {
-        boolean elementText=DriverManager.getWebDriverFromThreadLocal().findElement(By.xpath(xpathString)).isEnabled();
-        ExtentReportLogger.info(xpathString+" Text returned is "+ elementText);
-        log.info("{} Text returned is {}", xpathString, elementText);
-        return elementText;
-    }
 
     protected String getPageURL()
     {
