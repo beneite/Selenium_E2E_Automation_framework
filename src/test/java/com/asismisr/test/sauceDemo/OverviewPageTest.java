@@ -16,7 +16,7 @@ public final class OverviewPageTest extends BaseTest {
     }
 
     @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.REGRESSION})
-    @Test(dataProviderClass = com.asismisr.utils.dataSender.dataSending.class,dataProvider = "dataSendingPath")
+    @Test(dataProvider = "dataSendingPath")
     public void overviewPageTesting(String firstname_data,String lastname_data,String zipcode_data)
     {
         LogInPage logInPage=new LogInPage();

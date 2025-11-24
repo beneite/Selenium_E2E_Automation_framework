@@ -26,7 +26,8 @@ public class BasePage {
 
     private static final Logger log = LoggerFactory.getLogger(BasePage.class);
 
-    protected void goToUrl(String url){
+    // todo: make this protected
+    public void goToUrl(String url){
         DriverManager.getWebDriverFromThreadLocal().get(url);
         ExtentReportLogger.info("URL launched:"+url);
         log.info("Navigating to URL: {}", url);
@@ -201,12 +202,4 @@ public class BasePage {
         return element;
     }
 
-    protected void scrollToElement(By by)
-    {
-        Actions actions=new Actions(DriverManager.getWebDriverFromThreadLocal());
-        WebElement element=DriverManager.getWebDriverFromThreadLocal().findElement(by);
-        actions.scrollToElement(element).perform();
-        ExtentReportLogger.info("Element Scrolled:"+ by.toString());
-        log.info("{} Element Scrolled", by.toString());
-    }
 }
