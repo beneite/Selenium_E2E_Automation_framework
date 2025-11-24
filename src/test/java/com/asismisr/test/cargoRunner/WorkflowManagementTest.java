@@ -4,6 +4,7 @@ import com.asismisr.annotations.TestCategoryAnnotation;
 import com.asismisr.configs.Config;
 import com.asismisr.constants.Constants;
 import com.asismisr.enums.TestGroupEnum;
+import com.asismisr.listeners.ListenersClass;
 import com.asismisr.pages.cargoRunner.LoginPage;
 import com.asismisr.pages.cargoRunner.WorkflowManagementPage;
 import com.asismisr.test.BaseTest;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class WorkflowManagementTest extends BaseTest {
 
-    @TestCategoryAnnotation(testAuthors = "Ashish", testGroups = {TestGroupEnum.REGRESSION})
+    @TestCategoryAnnotation(testAuthors = "Aditya", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.SMOKE})
     @Test
     public void workflowManagementTest() throws InterruptedException {
         LoginPage loginPage=new LoginPage();
@@ -22,6 +23,7 @@ public class WorkflowManagementTest extends BaseTest {
         Assert.assertTrue(loginPage.isSigninButtonEnable());
         loginPage.clickOnSigninButton();
         Thread.sleep(5000);
+        ListenersClass.attachScreenshotWithMessage("Login done");
         WorkflowManagementPage workflowManagementPage=new WorkflowManagementPage();
         workflowManagementPage.navigateToURL(Config.getTestProperty(Constants.CARGORUNNER_NAVIGATING_URL));
         Assert.assertTrue(workflowManagementPage.isCreateNewTaskButtonPresent());
