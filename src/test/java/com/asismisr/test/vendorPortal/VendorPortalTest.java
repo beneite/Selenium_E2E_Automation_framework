@@ -5,6 +5,7 @@ import com.asismisr.configs.Config;
 import com.asismisr.enums.TestGroupEnum;
 import com.asismisr.pages.vendorPortal.dashboard.DashboardPage;
 import com.asismisr.pages.vendorPortal.userLogin.LoginPage;
+import com.asismisr.serviceLayer.vendorPortal.VendorPortalServiceLayer;
 import com.asismisr.test.BaseTest;
 import com.asismisr.test.vendorPortal.model.Employee;
 import com.asismisr.constants.Constants;
@@ -29,6 +30,7 @@ public final class VendorPortalTest extends BaseTest {
 
     private static Logger log = LoggerFactory.getLogger(VendorPortalTest.class);
 
+    private VendorPortalServiceLayer vendorPortalServiceLayer = new VendorPortalServiceLayer();;
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
 
@@ -64,7 +66,7 @@ public final class VendorPortalTest extends BaseTest {
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
-        loginPage.login(employee.getUsername(), employee.getPassword());
+        vendorPortalServiceLayer.enterCredentialToLoginService(employee.getUsername(), employee.getPassword());
     }
 
     @TestCategoryAnnotation(testAuthors = "Mohit", testGroups = {TestGroupEnum.SMOKE, TestGroupEnum.REGRESSION})
@@ -77,7 +79,7 @@ public final class VendorPortalTest extends BaseTest {
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
-        loginPage.login(employee.getUsername(), employee.getPassword());
+        vendorPortalServiceLayer.enterCredentialToLoginService(employee.getUsername(), employee.getPassword());
 
         // dashboard test
         this.dashboardPage = new DashboardPage();
@@ -104,7 +106,7 @@ public final class VendorPortalTest extends BaseTest {
         loginPage.goTo(Config.getTestProperty(Constants.VENDOR_PORTAL_URL));
         ExtentReportLogger.info("URL Launched");
         Assert.assertTrue(loginPage.isAt());
-        loginPage.login(employee.getUsername(), employee.getPassword());
+        vendorPortalServiceLayer.enterCredentialToLoginService(employee.getUsername(), employee.getPassword());
 
         // dashboard test [Vendor-002] Dashboard Test
         this.dashboardPage = new DashboardPage();
