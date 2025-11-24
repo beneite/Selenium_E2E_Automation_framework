@@ -2,6 +2,21 @@ name: pipeline-manual-run to run test cases manually
 
 on:
   workflow_dispatch:
+    inputs:
+      suiteName:
+        description: "Enter your full suite name"
+        type: string
+        required: true
+        default: "vendor-portal.xml"
+      testType:
+        description: "Select type of test to run"
+        type: choice
+        required: true
+        default: "smoke"
+        options:
+          - smoke
+          - regression
+          - sanity
 
 jobs:
   run-test-job:
@@ -25,7 +40,7 @@ jobs:
 
       - name: Running the test cases
         continue-on-error: true
-        run: mvn clean test -Dsuite=vendor-portal.xml
+        run: mvn clean test -Dsuite=${{ inputs.suiteName }}
 
       - name: Printing the Test execution status
         if: always()                                           # adding always() since this step will run always even if test cases run fail
