@@ -19,15 +19,15 @@ public class ExplicitWaitImplementation {
      * @param waitStrategyEnums
      * @return
      */
-    public static WebElement explicitWaitByStrategy(By by, WaitStrategyEnums waitStrategyEnums){
+    public static WebElement explicitWaitByStrategy(By by, WaitStrategyEnums waitStrategyEnums, long timeDuration){
 
         WebElement webElement;
         webElement = switch(waitStrategyEnums){
-            case CLICKABLE -> new WebDriverWait(DriverManager.getWebDriverFromThreadLocal(), Duration.ofSeconds(Constants.LONG_TEN))
+            case CLICKABLE -> new WebDriverWait(DriverManager.getWebDriverFromThreadLocal(), Duration.ofSeconds(timeDuration))
                     .until(ExpectedConditions.elementToBeClickable(by));
-            case VISIBLE -> new WebDriverWait(DriverManager.getWebDriverFromThreadLocal(), Duration.ofSeconds(Constants.LONG_TEN))
+            case VISIBLE -> new WebDriverWait(DriverManager.getWebDriverFromThreadLocal(), Duration.ofSeconds(timeDuration))
                     .until(ExpectedConditions.visibilityOfElementLocated(by));
-            case ISPRESENT -> new WebDriverWait(DriverManager.getWebDriverFromThreadLocal(), Duration.ofSeconds(Constants.LONG_TEN))
+            case ISPRESENT -> new WebDriverWait(DriverManager.getWebDriverFromThreadLocal(), Duration.ofSeconds(timeDuration))
                     .until(ExpectedConditions.presenceOfElementLocated(by));
             default -> throw new IllegalStateException("Unexpected value: " + waitStrategyEnums);
         };

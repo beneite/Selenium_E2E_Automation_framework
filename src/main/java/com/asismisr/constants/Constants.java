@@ -27,6 +27,14 @@ public final class Constants {
     public static final String YOURCART_TITLE="saucedemo.yourcartPageTitle";
     public static final String CHECKOUT_TITLE="saucedemo.checkoutPageTitle";
     public static final String PRICETOTAL_TEXT="saucedemo.priceTotalText";
+    public static final String CARGORUNNER_URL="cargo.website";
+    public static final String CARGORUNNER_USERNAME="cargo.username";
+    public static final String CARGORUNNER_PASSWORD="cargo.password";
+    public static final String CARGORUNNER_NAVIGATING_URL="cargo.workflowurl";
+    public static final String CARGORUNNER_FILLING_TASKNAME="cargo.taskName";
+    public static final String CARGORUNNER_FILLING_TASKCODE="cargo.taskCode";
+    public static final String CARGORUNNER_FILLING_WORKFLOWTYPE="cargo.workflowType";
+
 
 
     public static final Long LONG_TEN = 10L;
