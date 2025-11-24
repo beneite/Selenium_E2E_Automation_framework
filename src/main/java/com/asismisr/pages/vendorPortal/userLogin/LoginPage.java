@@ -25,11 +25,11 @@ public final class LoginPage extends BasePage {
     }
 
     public void login(String username, String password){
-        sendElementWithWait(USERNAME_INPUT, username, WaitStrategyEnums.ISPRESENT);
+        sendElementWithWait(USERNAME_INPUT, username, WaitStrategyEnums.ISPRESENT,5);
         ExtentReportLogger.info("USERNAME_INPUT is Entered for:"+username);
-        sendElementWithWait(PASSWORD_INPUT, password, WaitStrategyEnums.ISPRESENT);
+        sendElementWithWait(PASSWORD_INPUT, password, WaitStrategyEnums.ISPRESENT,5);
         ExtentReportLogger.info("PASSWORD_INPUT is Entered");
-        clickElementWithWait(LOGIN_BUTTON, WaitStrategyEnums.CLICKABLE);
+        clickElementWithWait(LOGIN_BUTTON, WaitStrategyEnums.CLICKABLE,5);
         ExtentReportLogger.info("Login button is clicked");
     }
 

@@ -38,6 +38,7 @@ public final class Driver {
             driver = getLocalWebdriver();
         }
         DriverManager.setWebDriverThreadLocal(driver);
+        DriverManager.getWebDriverFromThreadLocal().manage().window().maximize();
     }
 
     //TODO: need to add support for headless for remote web driver/selenium hub execution too
