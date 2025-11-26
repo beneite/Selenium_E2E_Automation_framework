@@ -2,7 +2,7 @@ name: pipeline-scheduled-run (daily 4:05 PM UTC)
 
 on:
   schedule:
-    - cron: "5 17 * * *"   # runs every day at 17:05 UTC (4:05 PM UTC)
+    - cron: "5 16 * * *"   # runs every day at 17:05 UTC (4:05 PM UTC)
 
 jobs:
   run-test-job:
