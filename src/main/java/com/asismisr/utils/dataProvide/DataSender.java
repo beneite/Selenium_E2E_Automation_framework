@@ -10,7 +10,7 @@ import java.io.*;
 
 public class DataSender {
 
-    @DataProvider(name = "dataproviding", parallel = true, t)
+    @DataProvider(name = "dataproviding", parallel = true)
     public String[][] dataSending() throws IOException {
         InputStream inputStream=new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\test-data\\cargoRunner\\Datas_Milestone.xlsx"));
         Workbook workbook=WorkbookFactory.create(inputStream);
