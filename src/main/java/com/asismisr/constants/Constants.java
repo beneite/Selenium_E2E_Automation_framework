@@ -34,6 +34,10 @@ public final class Constants {
     public static final String CARGORUNNER_FILLING_TASKNAME="cargo.taskName";
     public static final String CARGORUNNER_FILLING_TASKCODE="cargo.taskCode";
     public static final String CARGORUNNER_FILLING_WORKFLOWTYPE="cargo.workflowType";
+    public static final String CARGORUNNER_FILLING_EDITEDNAME="cargo.editedName";
+    public static final String CARGORUNNER_FILLING_EDITEDCODE="cargo.editedCode";
+    public static final String CARGORUNNER_FILLING_EDITEDWORKTYPE="cargo.editedWorkType";
+    public static final String CARGORUNNER_TITLE_WF="cargo.workflowPageTitle";
 
 
 

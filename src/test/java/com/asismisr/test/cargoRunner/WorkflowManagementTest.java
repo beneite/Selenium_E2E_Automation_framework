@@ -15,7 +15,7 @@ public class WorkflowManagementTest extends BaseTest {
 
     @TestCategoryAnnotation(testAuthors = "Aditya", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.SMOKE})
     @Test
-    public void workflowManagementTest() throws InterruptedException {
+    public void verifyTaskCreationWithMandatoryFieldsOnly() throws InterruptedException {
         LoginPage loginPage=new LoginPage();
         loginPage.goToUrl(Config.getTestProperty(Constants.CARGORUNNER_URL));
         Assert.assertFalse(loginPage.isSigninButtonEnable());

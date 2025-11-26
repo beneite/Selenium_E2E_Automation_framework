@@ -40,6 +40,11 @@ public class BasePage {
         log.info("Navigating to URL: {}", url);
     }
 
+    protected String xPathEditor(String xpath,String nameOfField)
+    {
+        return String.format(xpath,nameOfField);
+    }
+
     protected void clickElement(By by){
         DriverManager.getWebDriverFromThreadLocal().findElement(by).click();
         ExtentReportLogger.info("Element Clicked:"+ by.toString());
@@ -194,6 +199,16 @@ public class BasePage {
         log.info("{} Element Clicked", by.toString());
         return element;
     }
+
+    protected WebElement clearField(String xpath,WaitStrategyEnums waitStrategyEnums,long durationInSecond)
+    {
+        By by=By.xpath(xpath);
+        WebElement element=ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategyEnums,durationInSecond);
+        ExtentReportLogger.info("Field Cleared:"+by.toString());
+        log.info("{} Field Cleared", by.toString());
+        return element;
+
+    }
     protected WebElement findElementWithWait(String xpath, WaitStrategyEnums waitStrategyEnums,long durationInSecond){
         By by=By.xpath(xpath);
         WebElement element=ExplicitWaitImplementation.explicitWaitByStrategy(by, waitStrategyEnums,durationInSecond);
@@ -201,5 +216,6 @@ public class BasePage {
         log.info("{} Element Clicked", by.toString());
         return element;
     }
+
 
 }

@@ -8,7 +8,7 @@
     <test verbose="2" preserve-order="true"
           name="CargoRunner Testing">
         <classes>
-            <class name="com.asismisr.test.cargoRunner.WorkflowManagementTest"></class>
+            <class name="com.asismisr.test.cargoRunner.WorkflowMilestoneTest"></class>
         </classes>
 
     </test>
