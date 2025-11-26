@@ -1,0 +1,52 @@
+name: pipeline-scheduled-run (daily 4:05 PM UTC)
+
+on:
+  schedule:
+    - cron: "5 17 * * *"   # runs every day at 17:05 UTC (4:05 PM UTC)
+
+jobs:
+  run-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out the repo
+        uses: actions/checkout@v4
+
+      - name: Cache Maven dependencies              # adding this to speed up the execution, any changes in pom.xml file will result in cache miss
+        id: maven-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+
+      - name: listing the files before running
+        run: find .
+
+      - name: Build the project (compile and install)
+        run: mvn clean install -DskipTests
+
+      - name: Running the test cases
+        continue-on-error: true
+        run: mvn clean test -Dsuite=vendor-portal.xml
+
+      - name: Printing the Test execution status
+        if: always()                                           # adding always() since this step will run always even if test cases run fail
+        continue-on-error: true
+        run: cat target/test-output/testng-report/TestSuite.txt
+
+      - name: Publishing the Test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-upload-extentReport
+          path: target/test-output/extent-Report
+          retention-days: 30                                 # for 30 days the report will persist after that it will be deleted, default is 90 days
+
+  download-test-report-job:                                   # this will download the artifact
+    needs: run-test-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Test Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports-upload-extentReport
+          path: test-execution-reports/
