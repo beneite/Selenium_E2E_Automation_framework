@@ -14,4 +14,7 @@ public class MilestoneCreationPojo {
     private String mileStoneName;
     private String mileStoneCode;
     private String mileStoneWorkflowType;
+    private String mileStoneDescription;
+    private String mileStoneCustomerPortalFlag;
+    private String mileStoneDynamicFlag;
 }

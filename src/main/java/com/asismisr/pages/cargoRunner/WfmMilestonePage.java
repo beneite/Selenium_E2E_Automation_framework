@@ -13,10 +13,16 @@ public class WfmMilestonePage extends BasePage {
     private final String FIELD_MILESTONE_NAME="//label[text()='Milestone Name']/../div/input";
     private final String FIELD_MILESTONE_CODE="//label[text()='Milestone Code']/../div/input";
     private final String FIELD_WORKFLOWTYPE_CODE="//label[text()='Workflow Type*']/../div/input";
+    private final String FIELD_MILESTONE_DESCRIPTION="//label[text()='Milestone Description']/../div/textarea[@aria-invalid='false']";
+    private final String FIELD_CHECKBOX_TICK="//div[text()='%s']/../../div/span/input";
+    private final String CUSTOMER_FIELD_CHECKBOX="//div[text()='Show on Customer Portal']/../../div/span/input";
+    private final String DYNAMIC_FIELD_CHECKBOX="//div[text()='Dynamic']/../../div/span/input";
 
     private final String LIST_NAME="//span[text()='%s']";
     private final String LIST_CODE="//span[text()='%s']/../../../../td[3]/div/div/span";
     private final String LIST_WORKTYPE="//span[text()='%s']/../../../../td[4]/div/div/span";
+    private final String LIST_DISCRIPTION="//span[text()='%s']/../../../../td[2]/div/div/span";
+    
 
     public String returnsTitleText()
     {
@@ -63,6 +69,22 @@ public class WfmMilestonePage extends BasePage {
         findElementsXpath(FIELD_WORKFLOWTYPE_CODE).sendKeys(workflowType,Keys.ARROW_DOWN,Keys.ENTER);
     }
 
+    public void fillingMilestoneDiscription(String discriptionText)
+    {
+        findElementsXpath(FIELD_MILESTONE_DESCRIPTION).sendKeys(discriptionText);
+    }
+
+    public void tickOnShowonCustomerCheckbox()
+    {
+        clickOnElement(CUSTOMER_FIELD_CHECKBOX);
+    }
+
+    public void tickOnDynamicCheckbox()
+    {
+        clickOnElement(DYNAMIC_FIELD_CHECKBOX);
+    }
+    
+
     public void clickOnCreateButton()
     {
         clickOnElement(CREATE_BUTTON);
@@ -83,6 +105,12 @@ public class WfmMilestonePage extends BasePage {
     public boolean isMilestoneTypeListed(String milestoneType)
     {
         String newXpath=xPathEditor(LIST_WORKTYPE,milestoneType);
+        return clickElementWithWait(newXpath,WaitStrategyEnums.VISIBLE,10).isDisplayed();
+    }
+
+    public boolean isMilestoneDiscriptionListed(String discription)
+    {
+        String newXpath=xPathEditor(LIST_DISCRIPTION,discription);
         return clickElementWithWait(newXpath,WaitStrategyEnums.VISIBLE,10).isDisplayed();
     }
 

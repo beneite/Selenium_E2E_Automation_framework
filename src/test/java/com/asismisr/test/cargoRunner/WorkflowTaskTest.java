@@ -11,7 +11,7 @@ import com.asismisr.test.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class WorkflowManagementTest extends BaseTest {
+public class WorkflowTaskTest extends BaseTest {
 
     @TestCategoryAnnotation(testAuthors = "Aditya", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.SMOKE})
     @Test

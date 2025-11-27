@@ -16,9 +16,9 @@ public class DataSender {
     @DataProvider(name = "dataproviding")
     public Object[] dataSending() throws IOException {
         MilestoneCreationPojo milestoneCreationPojo;
-        InputStream inputStream=new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\test-data\\cargoRunner\\Datas_Milestone.xlsx"));
+        InputStream inputStream=new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\test-data\\cargoRunner\\DataCreation.xlsx"));
         Workbook workbook=WorkbookFactory.create(inputStream);
-        Sheet sheet=workbook.getSheetAt(0);
+        Sheet sheet=workbook.getSheetAt(1);
         int rowNum=sheet.getLastRowNum();
         int cellNum=sheet.getRow(0).getLastCellNum();
         String[][] field=new String[rowNum][cellNum];
@@ -34,6 +34,9 @@ public class DataSender {
             milestoneCreationPojo.setMileStoneName(field[i-1][0]);
             milestoneCreationPojo.setMileStoneCode(field[i-1][1]);
             milestoneCreationPojo.setMileStoneWorkflowType(field[i-1][2]);
+            milestoneCreationPojo.setMileStoneDescription(field[i-1][3]);
+            milestoneCreationPojo.setMileStoneCustomerPortalFlag(field[i-1][4]);
+            milestoneCreationPojo.setMileStoneDynamicFlag(field[i-1][5]);
             objectArray[i-1] = milestoneCreationPojo;
         }
 
