@@ -8,6 +8,7 @@ import com.asismisr.listeners.ListenersClass;
 import com.asismisr.pages.cargoRunner.LoginPage;
 import com.asismisr.pages.cargoRunner.WfmMilestonePage;
 import com.asismisr.pages.cargoRunner.WorkflowManagementPage;
+import com.asismisr.pojo.wfm.MilestoneCreationPojo;
 import com.asismisr.test.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,7 +17,7 @@ public class WorkflowMilestoneTest extends BaseTest {
 
     @TestCategoryAnnotation(testAuthors = "Aditya", testGroups = {TestGroupEnum.REGRESSION, TestGroupEnum.SMOKE})
     @Test(dataProviderClass = com.asismisr.utils.dataProvide.DataSender.class ,dataProvider = "dataproviding")
-    public void createMiletoneTest(String name, String code, String type) throws InterruptedException {
+    public void createMiletoneTest(MilestoneCreationPojo milestoneCreationPojo) throws InterruptedException {
         LoginPage loginPage=new LoginPage();
         loginPage.goToUrl(Config.getTestProperty(Constants.CARGORUNNER_URL));
         Assert.assertFalse(loginPage.isSigninButtonEnable());
@@ -33,15 +34,15 @@ public class WorkflowMilestoneTest extends BaseTest {
         wfmMilestonePage.clickonMilestoneButton();
         Assert.assertTrue(wfmMilestonePage.isCreatemilestoneTitleVisible());
         Assert.assertFalse(wfmMilestonePage.isCreateButtonEnabled());
-        wfmMilestonePage.fillingMilestoneName(name);
-        wfmMilestonePage.fillingMilestoneCode(code);
-        wfmMilestonePage.fillingMilestoneType(type);
+        wfmMilestonePage.fillingMilestoneName(milestoneCreationPojo.getMileStoneName());
+        wfmMilestonePage.fillingMilestoneCode(milestoneCreationPojo.getMileStoneCode());
+        wfmMilestonePage.fillingMilestoneType(milestoneCreationPojo.getMileStoneWorkflowType());
         ListenersClass.attachScreenshotWithMessage("Milestone datas filled");
         Assert.assertTrue(wfmMilestonePage.isCreateButtonEnabled());
         wfmMilestonePage.clickOnCreateButton();
-        Assert.assertTrue(wfmMilestonePage.isMilestoneNameListed(name));
-        Assert.assertTrue(wfmMilestonePage.isMilestoneCodeListed(code));
-        Assert.assertTrue(wfmMilestonePage.isMilestoneTypeListed(type));
+        Assert.assertTrue(wfmMilestonePage.isMilestoneNameListed(milestoneCreationPojo.getMileStoneName()));
+        Assert.assertTrue(wfmMilestonePage.isMilestoneCodeListed(milestoneCreationPojo.getMileStoneCode()));
+        Assert.assertTrue(wfmMilestonePage.isMilestoneTypeListed(milestoneCreationPojo.getMileStoneWorkflowType()));
         ListenersClass.attachScreenshotWithMessage("Present in milestone listing");
     }
 }
