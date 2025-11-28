@@ -8,6 +8,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.testng.annotations.DataProvider;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,9 @@ public class DataSender {
     @DataProvider(name = "dataproviding")
     public Object[] dataSending() throws IOException {
         MilestoneCreationPojo milestoneCreationPojo;
-        InputStream inputStream=new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\test-data\\cargoRunner\\DataCreation.xlsx"));
+        Path filePath = Paths.get("src", "test", "resources", "test-data", "cargoRunner", "DataCreation.xlsx");
+        File file = filePath.toFile();
+        InputStream inputStream=new FileInputStream(new File(System.getProperty("user.dir")+File.separator+file.getPath()));
         Workbook workbook=WorkbookFactory.create(inputStream);
         Sheet sheet=workbook.getSheetAt(1);
         int rowNum=sheet.getLastRowNum();
