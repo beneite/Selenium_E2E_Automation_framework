@@ -1,5 +1,6 @@
 package com.asismisr.codeUtils;
 
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -12,6 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CommonUtilis {
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final SecureRandom random = new SecureRandom();
 
     /**
      * This method will return the date in the specified format w.r.t to the current date
@@ -112,7 +115,6 @@ public class CommonUtilis {
             return "Invalid date-time format: " + e.getMessage();
         }
     }
-
     /**
      * Get current time as Instant converted from local system time zone.
      *
@@ -122,6 +124,15 @@ public class CommonUtilis {
         LocalDateTime localDateTime = LocalDateTime.now();
         ZoneId systemZone = ZoneId.systemDefault();
         return localDateTime.atZone(systemZone).toInstant();
+    }
+
+    public static String randomString(int length) {
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            sb.append(CHARACTERS.charAt(index));
+        }
+        return sb.toString();
     }
 
 }
