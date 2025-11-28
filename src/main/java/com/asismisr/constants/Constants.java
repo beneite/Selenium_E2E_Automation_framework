@@ -12,12 +12,34 @@ public final class Constants {
     public static final String SELENIUM_GRID_HUB_HOST = "selenium.grid.hubHost";
     public static final String BROWSER = "browser";
     public static final String FLIGHT_RESERVATION_URL = "flightregervation.url";
+    public static final String SAUCEDEMO_URL="saucedemo.url";
     public static final String VENDOR_PORTAL_URL = "vendorportal.url";
     public static final String ERROR_MSG_BROWSER_NOT_SUPPORT = "Browser type not supported";
     public static final String TRUE = "true";
     public static final String HEADLESS_MODE_FLAG = "browser.headless";
     public static final String ELASTIC_REALTIME_EXECUTION_REPORT = "elastic.realtime.execution.report";
     public static final String INFLUX_REALTIME_EXECUTION_REPORT = "influxDb.realtime.execution.report";
+    public static final String LOGIN_USERNAME="saucedemo.username";
+    public static final String LOGIN_PASSWORD="saucedemo.password";
+    public static final String LOGIN_BUTTON_ATTRIBUTE="Login";
+    public static final String PRODUCTPAGE_TITLE="saucedemo.productPageTitle";
+    public static final String ITEM_NAME="saucedemo.itemName";
+    public static final String YOURCART_TITLE="saucedemo.yourcartPageTitle";
+    public static final String CHECKOUT_TITLE="saucedemo.checkoutPageTitle";
+    public static final String PRICETOTAL_TEXT="saucedemo.priceTotalText";
+    public static final String CARGORUNNER_URL="cargo.website";
+    public static final String CARGORUNNER_USERNAME="cargo.username";
+    public static final String CARGORUNNER_PASSWORD="cargo.password";
+    public static final String CARGORUNNER_NAVIGATING_URL="cargo.workflowurl";
+    public static final String CARGORUNNER_FILLING_TASKNAME="cargo.taskName";
+    public static final String CARGORUNNER_FILLING_TASKCODE="cargo.taskCode";
+    public static final String CARGORUNNER_FILLING_WORKFLOWTYPE="cargo.workflowType";
+    public static final String CARGORUNNER_FILLING_EDITEDNAME="cargo.editedName";
+    public static final String CARGORUNNER_FILLING_EDITEDCODE="cargo.editedCode";
+    public static final String CARGORUNNER_FILLING_EDITEDWORKTYPE="cargo.editedWorkType";
+    public static final String CARGORUNNER_TITLE_WF="cargo.workflowPageTitle";
+
+
 
     public static final Long LONG_TEN = 10L;
 }

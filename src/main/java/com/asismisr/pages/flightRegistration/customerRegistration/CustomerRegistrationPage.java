@@ -26,8 +26,8 @@ public final class CustomerRegistrationPage extends BasePage {
     }
 
     public void enterUserDetails(String firstName, String lastName){
-        sendElementWithWait(FIRST_NAME_INPUT, firstName, WaitStrategyEnums.ISPRESENT);
-        sendElementWithWait(LAST_NAME_INPUT, lastName, WaitStrategyEnums.ISPRESENT);
+        sendElementWithWait(FIRST_NAME_INPUT, firstName, WaitStrategyEnums.ISPRESENT, 5);
+        sendElementWithWait(LAST_NAME_INPUT, lastName, WaitStrategyEnums.ISPRESENT,5);
     }
 
     public void enterUserCredentials(String email, String password){
@@ -42,6 +42,6 @@ public final class CustomerRegistrationPage extends BasePage {
     }
 
     public void register(){
-        clickElementWithWait(REGISTER_BUTTON, WaitStrategyEnums.CLICKABLE);
+        clickElementWithWait(REGISTER_BUTTON, WaitStrategyEnums.CLICKABLE,5L);
     }
 }

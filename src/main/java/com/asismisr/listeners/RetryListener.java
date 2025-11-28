@@ -6,7 +6,7 @@ import org.testng.ITestResult;
 public class RetryListener implements IRetryAnalyzer {
 
     private int count = 0;
-    private static final int MAX_RETRY_COUNT = 1; // set the maximum number of retries here
+    private static final int MAX_RETRY_COUNT = 0; // set the maximum number of retries here
 
     /**
      * this method will enable test case to re-run in case the test case fails.

@@ -28,7 +28,6 @@ public final class Config {
 
         // load the default properties
         properties = loadProperties();
-
         // overriding the default properties
         for(String key : properties.stringPropertyNames()){
             if(System.getProperties().containsKey(key)){
@@ -50,10 +49,11 @@ public final class Config {
      * @return property value
      */
     public static String getTestProperty(String key){
-        String value = properties.getProperty(key);
-        if(Objects.isNull(value))
-            throw new ResourceNotFoundExceptions("Value for {} not found in default.properties file for"+ key);
-        return value;
+
+        if(Objects.isNull(properties.getProperty(key))) {
+            throw new ResourceNotFoundExceptions("Value for not found in default.properties file for"+ key);
+        }
+        return properties.getProperty(key);
     }
 
     public static Properties loadProperties(){
